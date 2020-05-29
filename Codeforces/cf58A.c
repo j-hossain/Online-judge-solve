@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char a[100],b;
+	int s=0,i;
+	scanf("%s",a);
+	for(i=0;i<strlen(a);i++)
+	{
+		if(a[i]=='h')
+		{
+			for(i++;i<strlen(a);i++)
+			{
+				if(a[i]=='e')
+				{
+					for(i++;i<strlen(a);i++)
+					{
+						if(a[i]=='l')
+						{
+							for(i++;i<strlen(a);i++)
+							{
+								if(a[i]=='l')
+								{
+									for(i++;i<strlen(a);i++)
+									{
+										if(a[i]=='o')
+										{
+											for(i=0;i<strlen(a);i++)
+											{
+												s+=a[i];
+											}
+											if(s>=('h'+'e'+'l'+'l'+'o'))	
+												printf("YES\n");
+											else
+												printf("NO\n");
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	if(s==0)
+	printf("NO\n");
+	return 0;	
+}
