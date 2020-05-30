@@ -1,9 +1,16 @@
+//not accepted
+
 #include<stdio.h>
+double dif(double a, long long int b)
+{
+    return a>b?(a-b):(b-a);
+}
 
 int main()
 {
-    int r,l,h,c,m,x,y,t,i,tk;
-    double temp,mx,mn,now;
+    long long int r,l,m,x,y,ans,te;
+    int tk,t,h,c;
+    double temp,mn,now;
 
     scanf("%d",&tk);
     while(tk--)
@@ -15,26 +22,42 @@ int main()
             printf("1\n");
             continue;
         }
-
-        now=mn=mx=(h+c)/2;
-        i=2;
-        r=h+c;
-        while(mn<=now)
+        mn=h-t;
+        l=0;
+        r=100000000;
+        ans=1;
+        while(l<=r)
         {
-            if(mx==t)
-                break;
-            if(i%2)
-                x=c;
+            m=(l+r)/2;
+            x=m+1;
+            y=m;
+
+            now = (double)(h*x+c*y)/((double)x+y);
+
+            if(now<t)
+            {
+                if(t-now<=mn)
+                {
+                    mn=t-now;
+                    ans=x+y;
+                }
+                r=m-1;
+            }
             else
-                x=h;
-            r+=x;
-            i++;
-            now=r/i;
-            if(now>mx && now<=t)
-                mx=now;
+            {
+                if(now-t<=mn)
+                {
+                    mn=now-t;
+                    ans=x+y;
+                }
+                l=m+1;
+            }
         }
 
-        printf("%f %f\n",mn,now);
-        printf("%d\n",i-1);
+        temp = (h+c)/2.0;
+        if(dif(temp,t)<mn)
+            ans=2;
+
+        printf("%lld\n",ans);
     }
 }
