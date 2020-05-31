@@ -26,7 +26,7 @@ int main()
         l=0;
         r=100000000;
         ans=1;
-        while(l<=r)
+        while(l<r)
         {
             m=(l+r)/2;
             x=m+1;
@@ -45,7 +45,7 @@ int main()
             }
             else
             {
-                if(now-t<=mn)
+                if(now-t<mn)
                 {
                     mn=now-t;
                     ans=x+y;
@@ -61,3 +61,14 @@ int main()
         printf("%lld\n",ans);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
