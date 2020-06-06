@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+// not accepted
 int main()
 {
     int n,arr[100005],cumu[100005],i,mxi,mni,mx,mxc,mnc,sum;

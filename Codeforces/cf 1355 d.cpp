@@ -1,6 +1,17 @@
 #include<stdio.h>
 
+void inline inout()
+{
+    #ifndef ONLINE_JUDGE 
+    freopen("F:/Problem Solving/Online judges/input.txt","r",stdin);
+    freopen("F:/Problem Solving/Online judges/output.txt","w",stdout);
+    #endif
+}
+
 int main(){
+    
+    inout();
+
     int s,n;
     scanf("%d %d",&n,&s);
 

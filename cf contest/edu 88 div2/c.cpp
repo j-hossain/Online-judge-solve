@@ -1,5 +1,3 @@
-//not accepted
-
 #include<stdio.h>
 double dif(double a, long long int b)
 {
@@ -24,9 +22,9 @@ int main()
         }
         mn=h-t;
         l=0;
-        r=100000000;
+        r=10000000000;
         ans=1;
-        while(l<r)
+        while(l<=r)
         {
             m=(l+r)/2;
             x=m+1;
@@ -36,7 +34,7 @@ int main()
 
             if(now<t)
             {
-                if(t-now<=mn)
+                if(t-now<mn)
                 {
                     mn=t-now;
                     ans=x+y;
@@ -60,6 +58,7 @@ int main()
 
         printf("%lld\n",ans);
     }
+    return 0;
 }
 
 
