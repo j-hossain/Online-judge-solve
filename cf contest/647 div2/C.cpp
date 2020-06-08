@@ -17,12 +17,17 @@ using namespace std;
 #define ff(j,s,e,r)     for(j=s;j<e;j+=r)
 #define bf(j,s,e,r)     for(j=s;j>e;j-=r)
 
+int logi(li n)
+{
+    if(n==1)return 0;
+    return 1+logi(n/2);
+}
 
 MM
 {
     fast();
     li n,ans;
-    int mn,x,temp;
+    li mn,x,temp,tt;
     test{
         cin>>n;
         if(n==1)
@@ -30,33 +35,20 @@ MM
             cout<<"1"<<endl;
             continue;
         }
-
-        else
-            x=log2(n);
-        ans=pow(2,x+1)-1;
-        if(pow(2,x)<n)
+        ans=0LL;
+        tt=0LL;
+        mn=n;
+        while(tt<n)
         {
+            x=logi(mn);
             mn=pow(2,x);
-            while(x>=0)
-            {
-                mn+=(pow(2,x-1));
-                if(mn<=n){
-                   temp=pow(2,x-1)-1;
-                   ans+= (temp+1)/2+(temp/2)*2;
-                   ans+=x;
-                   if(mn==n)
-                    break;
-                }
-                else
-                {
-                    mn-=pow(2,x-1);
-                    temp = n-mn;
-                    ans+= (temp+1)/2+(temp/2)*2;
-                    break;
-                }
-                x--;
-            }
+            temp=pow(2,x+1)-1;
+            ans+=temp;
+            tt+=mn;
+            mn=n-tt;
         }
             cout<<ans<<endl;
     }
+    return 0;
 }
+

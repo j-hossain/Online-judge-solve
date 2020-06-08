@@ -4,11 +4,12 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 #define MM          int main()
 #define li          long long int
-#define test        int t;cin>>t;while(t--)
+#define test()      int t;cin>>t;while(t--)
 #define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);
 
 #define DEC         int i,n,j,cnt=0,flag;
@@ -19,7 +20,7 @@ using namespace std;
 
 void inline inout()
 {
-    #ifndef ONLINE_JUDGE 
+    #ifndef ONLINE_JUDGE
     freopen("F:/Problem Solving/Online judges/input.txt","r",stdin);
     freopen("F:/Problem Solving/Online judges/output.txt","w",stdout);
     #endif
@@ -31,5 +32,12 @@ MM
     fast();
     inout();
 
-    
+    char ch;
+    string st;
+
+    cin>>ch;
+    st.push_back(ch);
+    cout<<st<<endl;
+
+    return 0;
 }

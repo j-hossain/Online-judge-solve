@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+#define MM          int main()
+#define li          long long int
+#define test()     	int t;cin>>t;while(t--)
+#define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);
+
+#define DEC         int i,n,j,cnt=0,flag;
+#define mx          100005
+
+#define ff(j,s,e,r)     for(j=s;j<e;j+=r)
+#define bf(j,s,e,r)     for(j=s;j>e;j-=r)
+
+void inline inout()
+{
+    #ifndef ONLINE_JUDGE
+    freopen("F:/Problem Solving/Online judges/input.txt","r",stdin);
+    freopen("F:/Problem Solving/Online judges/output.txt","w",stdout);
+    #endif
+}
+
+int gcd(int a,int b)
+{
+	if(a%b==0)
+		return b;
+	return gcd(b,a%b);
+}
+
+int lcm(int a, int b)
+{
+	return (a*b)/gcd(a,b);
+}
+
+MM
+{
+    fast();
+    inout();
+
+    int n,m,a,b,arr[55][55],i,j,dif,d,cnt;
+
+    test()
+    {
+    	cin>>n>>m>>a>>b;
+
+    	if(m/n!=a/b)
+    	{
+    		cout<<"NO\n";
+    		continue;
+    	}
+
+        for(i=0;i<55;i++)
+        {
+            for(j=0;j<55;j++)
+                arr[i][j]=0;
+        }
+    	dif=lcm(n,m);
+    	dif/=n;
+    	d=0;
+    	cout<<"YES"<<endl;
+    	for(i=0;i<n;i++)
+    	{
+    	    cnt=0;
+    	    if(d==m)
+                d=0;
+    		for(j=d;j<m;)
+    		{
+    		    if(cnt<a)
+                {
+                    cnt++;
+                    arr[i][j++]=1;
+                    if(j==m)
+                        j=0;
+                }
+    		}
+    		d+=dif;
+            //cout<<d<<endl;
+    	}
+
+    	for(i=0;i<n;i++)
+        {
+            for(j=0;j<m;j++)
+                cout<<arr[i][j];
+            cout<<endl;
+        }
+    }
+
+    return 0;
+}

@@ -18,29 +18,29 @@ using namespace std;
 #define bf(j,s,e,r)     for(j=s;j>e;j-=r)
 
 
-MM
+int arr[1050],mapi[1050],m,x;
+int i,n;
+
+int main()
 {
-    DEC;
     fast();
-    int arr[mx],mapi[mx],m,x;
     test
     {
-        cnt=0;
         cin>>n;
         i=m=0;
-        ff(i,0,mx,1)
-            mapi[i]=0;
         while(i<n)
         {
-            cin>>arr[i++];
-            mapi[arr[i-1]]=1;
-            if(arr[i-1]>m)
-                m=arr[i-1];
+            cin>>arr[i];
+            mapi[arr[i]]=1;
+            if(arr[i]>m)
+                m=arr[i];
+
+            i++;
         }
         x=1;
         while(x<=m)
         {
-            ff(i,0,n,1)
+            for(i=0;i<n;i++)
             {
                 if(mapi[x^arr[i]]!=1)
                     break;
@@ -49,7 +49,7 @@ MM
                 break;
             x++;
         }
-        ff(i,0,n,1)
+        for(i=0;i<n;i++)
             mapi[arr[i]]=0;
         if(x>m)
             cout<<"-1"<<endl;
