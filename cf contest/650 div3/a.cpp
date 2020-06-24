@@ -4,6 +4,8 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
+#include<string.h>
 using namespace std;
 
 #define MM          int main()
@@ -25,46 +27,28 @@ void inline inout()
     #endif
 }
 
+
 MM
 {
     fast();
     inout();
-
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
+    char inp[105],out[105];
+    int i,j,len;
 
     test()
     {
-        cnt1=cnt0=0;
-        cin>>n;
-        for(i=0;i<n;i++)
+        cin>>inp;
+        out[0]=inp[0];
+        j=1;
+        len=strlen(inp);
+        for(i=1;i<len;i+=2,j++)
         {
-            cin>>arr[i];
-            arr2[i]=arr[i];
+            out[j]=inp[i];
         }
-        for(i=0;i<n;i++)
-        {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
-        }
-
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
-        {
-            if(arr[i]!=arr2[i])
-                sorted=0;
-        }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        out[j]='\0';
+        cout<<out<<endl;
     }
+
+
     return 0;
 }

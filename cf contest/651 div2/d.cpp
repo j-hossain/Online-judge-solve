@@ -1,3 +1,5 @@
+//not accepted
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -34,7 +36,20 @@ DN
     fast();
     inout();
 
+    int n,k,i,arr[200005];
 
+    cin>>n>>k;
+
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+
+    sort(arr,arr+n);
+
+    k=(k+1)/2;
+    k--;
+    cout<<arr[k]<<endl;
 
 
     return 0;

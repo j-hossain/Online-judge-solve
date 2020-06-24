@@ -25,61 +25,44 @@ void inline inout()
     #endif
 }
 
-typedef struct
-{
-    int vl;
-    int po;
-}ele;
-
-int iff(ele a, ele b)
-{
-    return a.vl<b.vl;
-}
-
 MM
 {
     fast();
     inout();
 
-    int n,i,j,temp,flag;
-    ele arr[505];
-    int type[505],arr2[505];
+    int n,i,j,cnt1,cnt0,sorted;
+    int arr[505];
+    int type,arr2[505];
 
     test()
     {
+        cnt1=cnt0=0;
         cin>>n;
         for(i=0;i<n;i++)
         {
-            cin>>arr[i].vl;
-            arr[i].po=i;
-            arr2[i]=arr[i].vl;
+            cin>>arr[i];
+            arr2[i]=arr[i];
         }
         for(i=0;i<n;i++)
         {
-            cin>>type[i];
+            cin>>type;
+            if(type)
+                cnt1++;
+            else
+                cnt0++;
         }
+        
+        sort(arr2,arr2+n);
 
-
-        sort(arr,arr+n,iff);
-
-        flag=1;
+        sorted=1;
         for(i=0;i<n;i++)
         {
-            j=i;
-            while(type[arr[j].po]==type[j])
-            {
-                j=arr[j].po;
-                if(j==i)
-                    break;
-            }
-            if(type[arr[j].po]==type[j])
-                flag=0;
+            if(arr[i]!=arr2[i])
+                sorted=0;
         }
-
-        if(flag)
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        
+        if(sorted || (cnt1 && cnt0))
+            co
     }
     return 0;
 }

@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 #define MM          int main()
@@ -25,46 +26,39 @@ void inline inout()
     #endif
 }
 
+int check(int a, int b)
+{
+    if(a>b)
+        return 1;
+    if(a==b)
+        return 0;
+    return check(a*a,b);
+}
+
 MM
 {
     fast();
     inout();
 
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
+    int n,num,i,ans1[500007],ans2[500007],j,sq,temp;
 
-    test()
+    cin>>n;
+
+    for(i=0;i<n;i++)
     {
-        cnt1=cnt0=0;
-        cin>>n;
-        for(i=0;i<n;i++)
+        cin>>num;
+        sq=sqrt(num);
+        for(j=2;j<sq;j++)
         {
-            cin>>arr[i];
-            arr2[i]=arr[i];
+            if(num%j==0)
+            {
+                if(check(j,num))
+                {
+                    temp
+                }
+            }
         }
-        for(i=0;i<n;i++)
-        {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
-        }
-
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
-        {
-            if(arr[i]!=arr2[i])
-                sorted=0;
-        }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
     }
+
     return 0;
 }

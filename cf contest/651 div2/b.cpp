@@ -34,7 +34,43 @@ DN
     fast();
     inout();
 
+    int n,num,even[2005],odd[2005],e,o;
 
+    test()
+    {
+        cin>>n;
+        e=o=0;
+        for(int i=0;i<2*n;i++)
+        {
+            cin>>num;
+            if(num%2)
+                odd[o++]=i+1;
+            else
+                even[e++]=i+1;
+        }
+        if(o%2)
+        {
+            o--;
+            e--;
+        }
+        else
+        {
+            if(e>o)
+                e-=2;
+            else
+                o-=2;
+        }
+
+        for(int i=0;i<e;i+=2)
+        {
+            cout<<even[i]<<" "<<even[i+1]<<endl;
+        }
+
+        for(int i=0;i<o;i+=2)
+        {
+            cout<<odd[i]<<" "<<odd[i+1]<<endl;
+        }
+    }
 
 
     return 0;

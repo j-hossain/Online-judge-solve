@@ -34,7 +34,15 @@ DN
     fast();
     inout();
 
+    int n;
 
+    test()
+    {
+        cin>>n;
+        n/=2;
+
+        cout<<n<<endl;
+    }
 
 
     return 0;

@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 #define MM          int main()
@@ -25,46 +26,52 @@ void inline inout()
     #endif
 }
 
+
 MM
 {
     fast();
     inout();
 
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
+    li n,x,i,sum,arr[100005],lenght,flag;
 
     test()
     {
-        cnt1=cnt0=0;
-        cin>>n;
+        cin>>n>>x;
+        sum=lenght=flag=0;
         for(i=0;i<n;i++)
         {
             cin>>arr[i];
-            arr2[i]=arr[i];
+            sum+=arr[i];
+            if(arr[i]%x!=0)
+                flag=1;
+        }
+        if(sum%x!=0)
+        {
+            cout<<n<<endl;
+            continue;
+        }
+        if(!flag)
+        {
+            cout<<"-1"<<endl;
+            continue;
         }
         for(i=0;i<n;i++)
         {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
+            if(arr[i]%x!=0)
+                break;
         }
-
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
+        lenght=(i+1)>(n-i-1)?(i+1):(n-i-1);
+        for(i=n-1;i>=0;i--)
         {
-            if(arr[i]!=arr2[i])
-                sorted=0;
+            if(arr[i]%x!=0)
+                break;
         }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        i=(n-i)>i?(n-i):i;
+        if(i>lenght)
+            lenght=i;
+        cout<<lenght<<endl;
     }
+
+
     return 0;
 }

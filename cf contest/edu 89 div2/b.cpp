@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 #define MM          int main()
@@ -25,46 +26,44 @@ void inline inout()
     #endif
 }
 
+
 MM
 {
     fast();
     inout();
 
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
-
+    int n,m,ans,mxx,mn,x,a,b;
     test()
     {
-        cnt1=cnt0=0;
-        cin>>n;
-        for(i=0;i<n;i++)
+        cin>>n>>x>>m;
+        mn=mxx=x;
+        while(m--)
         {
-            cin>>arr[i];
-            arr2[i]=arr[i];
-        }
-        for(i=0;i<n;i++)
-        {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
+            cin>>a>>b;
+
+            if(a>b)
+            {
+                a=a+b;
+                b=a-b;
+                a=a-b;
+            }
+            if(a<=mn && b>=mxx)
+            {
+                mn=a;
+                mxx=b;
+            }
+            else if(a<=mn && mn<=b)
+                mn=a;
+            else if(a<=mxx && mxx<=b)
+                mxx=b;
+
+            //cout<<mxx<<" "<<mn<<endl;
         }
 
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
-        {
-            if(arr[i]!=arr2[i])
-                sorted=0;
-        }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        ans=mxx-mn+1;
+        cout<<ans<<endl;
     }
+
+
     return 0;
 }

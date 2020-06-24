@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 #define MM          int main()
@@ -17,6 +18,11 @@ using namespace std;
 #define ff(j,s,e,r)     for(j=s;j<e;j+=r)
 #define bf(j,s,e,r)     for(j=s;j>e;j-=r)
 
+int dif(int a, int b)
+{
+    return a<b?(b-a):(a-b);
+}
+
 void inline inout()
 {
     #ifndef ONLINE_JUDGE
@@ -25,46 +31,47 @@ void inline inout()
     #endif
 }
 
+vector<int>ans;
+
 MM
 {
     fast();
     inout();
 
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
+    int n,arr[100005],i,sum,cnt,temp;
 
     test()
     {
-        cnt1=cnt0=0;
+        ans.clear();
         cin>>n;
         for(i=0;i<n;i++)
         {
             cin>>arr[i];
-            arr2[i]=arr[i];
         }
-        for(i=0;i<n;i++)
+        ans.push_back(arr[0]);
+        for(i=1;i<n;i++)
         {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
+            temp=i-1;
+            if(arr[i]<=arr[i-1])
+            {
+                while(arr[i]<=arr[i-1] && i<n)
+                    i++;
+            }
+            else if(arr[i]>arr[i-1])
+            {
+                while(arr[i]>arr[i-1] && i<n)
+                    i++;
+            }
+            i--;
+            ans.push_back(arr[i]);
         }
 
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
-        {
-            if(arr[i]!=arr2[i])
-                sorted=0;
-        }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        cout<<ans.size()<<endl;
+        for(i=0;i<ans.size();i++)
+            cout<<ans[i]<<" ";
+        cout<<endl;
     }
+
+
     return 0;
 }

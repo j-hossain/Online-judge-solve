@@ -4,9 +4,10 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
-#define MM          int main()
+#define DN          int main()
 #define li          long long int
 #define test()      int t;cin>>t;while(t--)
 #define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);
@@ -14,8 +15,10 @@ using namespace std;
 #define DEC         int i,n,j,cnt=0,flag;
 #define mx          100005
 
-#define ff(j,s,e,r)     for(j=s;j<e;j+=r)
-#define bf(j,s,e,r)     for(j=s;j>e;j-=r)
+#define ff(s,e)         for(i=s;i<e;i+=r)
+#define bf(s,e)         for(i=s;i>e;i-=r)
+#define ff2(j,s,e,r)    for(j=s;j<e;j+=r)
+#define bf2(j,s,e,r)    for(j=s;j>e;j-=r)
 
 void inline inout()
 {
@@ -25,46 +28,46 @@ void inline inout()
     #endif
 }
 
-MM
+
+DN
 {
     fast();
     inout();
 
-    int n,i,j,cnt1,cnt0,sorted;
-    int arr[505];
-    int type,arr2[505];
+    int n,fo,lz,i;
+    char inp[200005];
 
     test()
     {
-        cnt1=cnt0=0;
+        lz=-1;
+        fo=-1;
         cin>>n;
+        cin>>inp;
         for(i=0;i<n;i++)
         {
-            cin>>arr[i];
-            arr2[i]=arr[i];
+            if(inp[i]=='1')
+            {
+                fo=i;
+                break;
+            }
         }
-        for(i=0;i<n;i++)
+        for(i=fo;i<n;i++)
         {
-            cin>>type;
-            if(type)
-                cnt1++;
-            else
-                cnt0++;
+            if(inp[i]=='0')
+                lz=i;
         }
-
-        sort(arr2,arr2+n);
-
-        sorted=1;
-        for(i=0;i<n;i++)
-        {
-            if(arr[i]!=arr2[i])
-                sorted=0;
-        }
-
-        if(sorted || (cnt1 && cnt0))
-            cout<<"YES\n";
+        if(fo==-1 || lz==-1)
+            cout<<inp<<endl;
         else
-            cout<<"NO\n";
+        {
+            for(i=0;i<fo;i++)
+                cout<<inp[i];
+            for(i=lz;i<n;i++)
+                cout<<inp[i];
+            cout<<endl;
+        }
     }
+
+
     return 0;
 }
