@@ -28,11 +28,26 @@ void inline inout()
     #endif
 }
 
+long long int fact(int n){
+    long long int ans = 1;
+    for(int i=1; i<=n; i++){
+        ans*= i;
+    }
+    return ans;
+}
 
 DN
 {
     fast();
-    inout();
+    //inout();
+    long long int n,a,b;
+    cin>>n;
+    a = fact(n);
+    b = fact(n/2);
+
+    a /= b;
+    a /= b;
+    cout<<(a/2)<<"\n";
 
 
     return 0;

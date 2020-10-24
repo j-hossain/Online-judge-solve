@@ -33,7 +33,32 @@ DN
 {
     fast();
     inout();
+    int n,pr,no,m,mi,i,arr[300005];
+    test(){
+        mi = -1;
+        m = 0;
+        cin>>n;
+        for(i=0;i<n;i++){
+            cin>>arr[i];
+            if(arr[i]>m)
+                m = arr[i];
+        }
+        for(i=0;i<n;i++){
+            if(arr[i]==m && i<n-1){
+                if(arr[i]>arr[i+1]){
+                    mi = i+1;
+                    break;
+                }
+            }
+            if(arr[i]==m && i>0){
+                if(arr[i]>arr[i-1]){
+                    mi = i+1;
+                    break;
+                }
+            }
+        }
 
-
+        cout<<mi<<endl;
+    }
     return 0;
 }

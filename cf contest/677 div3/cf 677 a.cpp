@@ -32,8 +32,23 @@ void inline inout()
 DN
 {
     fast();
-    inout();
+    //inout();
 
+    int n,cnt;
+    test(){
+        cin>>n;
+        int d = n%10;
+        cnt = (d-1)*10;
 
+        if(n%1111==0)
+            cnt+=10;
+        else if(n%111==0)
+            cnt+=6;
+        else if(n%11==0)
+            cnt+=3;
+        else
+            cnt++;
+        cout<<cnt<<endl;
+    }
     return 0;
 }

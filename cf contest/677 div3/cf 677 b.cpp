@@ -32,8 +32,42 @@ void inline inout()
 DN
 {
     fast();
-    inout();
+    //inout();
 
+    int n,l,r;
+    int arr[55];
+    test(){
+        cin>>n;
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
 
+        for(int i=0; i<n; i++){
+            if(arr[i]){
+                i++;
+                while(arr[i])
+                    i++;
+                l = i-1;
+                break;
+            }
+        }
+        for(int i=n-1; i>=0; i--){
+            if(arr[i]){
+                i--;
+                while(arr[i])
+                    i--;
+                r = i+1;
+                break;
+            }
+        }
+        int cnt = 0;
+        if(l!=r){
+            for(int i=l; i<r; i++){
+                if(!arr[i])
+                    cnt++;
+            }
+        }
+
+        cout<<cnt<<endl;
+    }
     return 0;
 }
