@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,22 @@ DN
 {
     fast();
     inout();
+
+    int x,y,k,n,d;
+
+    test(){
+        cin>>x>>y>>k>>n;
+        d = abs(x-y);
+        if(d%k==0){
+            if((d/k)%2==0){
+                cout<<"Yes\n";
+            }
+            else
+                cout<<"No\n";
+        }
+        else
+            cout<<"No\n";
+    }
 
     return 0;
 }

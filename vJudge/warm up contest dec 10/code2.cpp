@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,34 @@ DN
 {
     fast();
     inout();
+
+    char grid[1000][1000];
+
+    int n,m,r,c,tc,tr;
+
+    cin>>n>>m;
+
+    for(i=0;i<n;i++)
+        cin>>grid[i];
+    r=c=0;
+    flag=1;
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            if(grid[i][j]=='*'){
+                r++;
+                tc=i;
+                break;
+            }
+        }
+        if(i>1)
+            break;
+    }
+
+    print:
+        if(flag){
+            if(r2==-1)
+        }
+
 
     return 0;
 }

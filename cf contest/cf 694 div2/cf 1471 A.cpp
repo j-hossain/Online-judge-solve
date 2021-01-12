@@ -36,6 +36,22 @@ DN
 {
     fast();
     inout();
+    li n,arr[100005],x,mn,mm,sum,i;
+
+    test()
+    {
+        cin>>n>>x;
+        sum=mm=0;
+        ff(0,n){
+            cin>>arr[i];
+            mm+=ceil((double)arr[i]/x);
+            sum+=arr[i];
+        }
+
+        sum= ceil((double)sum/x);
+
+        cout<<min(sum,mm)<<spc<<max(sum,mm)<<nn;
+    }
 
     return 0;
 }

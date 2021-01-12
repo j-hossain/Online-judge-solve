@@ -37,5 +37,29 @@ DN
     fast();
     inout();
 
+    li n,arr,tw,on,flag,i;
+
+    test(){
+        cin>>n;
+        on=tw=0;
+        ff(0,n){
+            cin>>arr;
+            if(arr%2)
+                on++;
+            else
+                tw++;
+        }
+        flag=0;
+        if(on%2==0){
+            if((tw%2 && on>0)||tw%2==0)
+                flag=1;
+        }
+
+        if(flag)
+            cout<<"Yes\n";
+        else
+            cout<<"No\n";
+    }
+
     return 0;
 }

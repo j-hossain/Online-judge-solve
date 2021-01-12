@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -32,10 +31,27 @@ void inline inout()
 }
 
 
+li n,x,arr[mx],mapi[mx],ans,i,test;
+
 DN
 {
     fast();
     inout();
+
+    cin>>n>>x;
+    ff(0,n){
+        cin>>arr[i];
+    }
+    ans=0LL;
+    bf(n-1,-1){
+        test = arr[i]^x;
+        if(test>mx)
+            continue;
+        ans += mapi[test];
+        mapi[arr[i]]++;
+    }
+
+    cout<<ans<<nn;
 
     return 0;
 }

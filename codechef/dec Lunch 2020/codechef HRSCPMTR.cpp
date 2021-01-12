@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -31,11 +30,13 @@ void inline inout()
     #endif
 }
 
+int grid[500][500];
 
 DN
 {
     fast();
     inout();
 
+    int n,m,q,x,y,v,i,j,
     return 0;
 }

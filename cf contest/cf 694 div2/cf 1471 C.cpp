@@ -31,11 +31,36 @@ void inline inout()
     #endif
 }
 
+li n,na[300005],ma[300005],m,i,j,sum;
 
 DN
 {
     fast();
     inout();
+
+
+    test(){
+        cin>>n>>m;
+        ff(0,n)
+            cin>>na[i];
+        ff(0,m)
+            cin>>ma[i];
+
+        sort(na,na+n);
+
+        j=sum=0;
+        for(i=n-1;i>=0;i--){
+            if(j<na[i]){
+                sum+=ma[j];
+                j++;
+            }
+            else
+                sum+=ma[na[i]-1];
+
+        }
+
+        cout<<sum<<nn;
+    }
 
     return 0;
 }

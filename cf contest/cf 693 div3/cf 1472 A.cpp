@@ -8,6 +8,7 @@
 #include<set>
 using namespace std;
 
+
 #define DN          int main()
 #define li          long long int
 #define test()      int t;cin>>t;while(t--)
@@ -36,6 +37,31 @@ DN
 {
     fast();
     inout();
+
+    li w,h,n,a,b;
+
+    test(){
+        cin>>w>>h>>n;
+        a=1;
+        while(a<n && w>0){
+            if(w%2)
+                break;
+            w/=2;
+            a*=2;
+        }
+        b=1;
+        while(b*a<n && h>0){
+            if(h%2)
+                break;
+            h/=2;
+            b*=2;
+        }
+
+        if(a*b>=n)
+            cout<<"Yes\n";
+        else
+            cout<<"No\n";
+    }
 
     return 0;
 }

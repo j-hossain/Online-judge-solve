@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,20 @@ DN
 {
     fast();
     inout();
+
+    li  n,prev,now,i;
+    li ans;
+
+    ans=0;
+    cin>>n>>prev;
+    ff(1,n){
+        cin>>now;
+        if(now<prev)
+            ans+=(prev-now);
+        prev = now;
+    }
+
+    cout<<ans<<nn;
 
     return 0;
 }

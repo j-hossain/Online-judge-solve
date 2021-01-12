@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -35,7 +34,33 @@ void inline inout()
 DN
 {
     fast();
-    inout();
+    //inout();
 
+    int mapi[26],i,s,m,x;
+    char inp[100005];
+
+    test(){
+        cin>>inp;
+        ff(0,26)
+            mapi[i]=0;
+        for(i=0;inp[i]!='\0';i++){
+            mapi[inp[i]-'a']++;
+        }
+        s=0;
+        m=0;
+        ff(0,26){
+            s+=(mapi[i]/2);
+            m+=(mapi[i]%2);
+        }
+
+        if(s>m){
+            x=(s-m)/3;
+            if((s-m)%3!=0)
+                x++;
+            s-=x;
+        }
+
+        cout<<s<<nn;
+    }
     return 0;
 }

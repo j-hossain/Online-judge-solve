@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -35,7 +34,30 @@ void inline inout()
 DN
 {
     fast();
-    inout();
+    //inout();
+
+    int n,m,a,b,sa,sb,ma,mb,ans,i;
+
+    test(){
+        cin>>n;
+        ma=sa=0;
+        ff(0,n){
+            cin>>a;
+            sa+=a;
+            if(sa>ma)
+                ma=sa;
+        }
+        cin>>m;
+        mb=sb=0;
+        ff(0,m){
+            cin>>b;
+            sb+=b;
+            if(sb>mb)
+                mb=sb;
+        }
+
+        cout<<(ma+mb)<<nn;
+    }
 
     return 0;
 }

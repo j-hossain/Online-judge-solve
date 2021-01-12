@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,27 @@ DN
 {
     fast();
     inout();
+    int n,k,x[105],y[105],i,j,cnt;
+
+    test(){
+        cin>>n>>k;
+        ff(0,n){
+            cin>>x[i]>>y[i];
+        }
+
+        for(i=0;i<n;i++){
+            for(j=0,cnt=0;j<n;j++){
+                if(abs(x[i]-x[j])+abs(y[i]-y[j])<=k)
+                    cnt++;
+            }
+            if(cnt==n)
+                break;
+        }
+        if(cnt==n)
+            cout<<"1\n";
+        else
+            cout<<"-1\n";
+    }
 
     return 0;
 }

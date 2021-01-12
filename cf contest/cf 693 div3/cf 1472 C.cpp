@@ -37,5 +37,27 @@ DN
     fast();
     inout();
 
+    li n,arr[200005],i,mm;
+
+    test(){
+        cin>>n;
+
+        ff(0,n){
+            cin>>arr[i];
+        }
+
+        bf(n-1,-1){
+            if(arr[i]+i<n)
+                arr[i]=arr[i]+arr[i+arr[i]];
+        }
+        mm=0;
+        ff(0,n){
+            if(mm<arr[i])
+                mm=arr[i];
+        }
+
+        cout<<mm<<endl;
+    }
+
     return 0;
 }

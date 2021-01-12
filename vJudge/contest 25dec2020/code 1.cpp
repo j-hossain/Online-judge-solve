@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -31,11 +30,48 @@ void inline inout()
     #endif
 }
 
+int a[100005];
+int b[100005];
 
 DN
 {
     fast();
     inout();
+
+    int n,i,j,k,h;
+
+    cin>>n;
+
+    ff(0,n){
+        cin>>a[i]>>b[i];
+    }
+
+
+    for(k=0,i=0,j=0;k<n;k++){
+        if(a[i]<b[j]){
+            a[i++]=-1;
+        }
+        else
+            b[j++]=-1;
+    }
+
+    h=n/2;
+    h--;
+
+    ff(0,n){
+        if(i<=h || a[i]==-1)
+            cout<<"1";
+        else
+            cout<<"0";
+    }
+    cout<<nn;
+    ff(0,n){
+        if(i<=h || b[i]==-1)
+            cout<<"1";
+        else
+            cout<<"0";
+    }
+    cout<<nn;
 
     return 0;
 }

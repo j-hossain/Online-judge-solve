@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -31,11 +30,32 @@ void inline inout()
     #endif
 }
 
+li gcd(li a, li b)
+{
+    if (b != 0)
+       return gcd(b, a % b);
+    else
+       return a;
+}
+
+li lcm(li a, li b){
+    return (a*b)/gcd(a,b);
+}
 
 DN
 {
     fast();
-    inout();
+    //inout();
+
+    li n,ans,i;
+    cin>>n;
+    ans = 1LL;
+    ff(2,n+1)
+    {
+        ans = lcm(i,ans);
+    }
+    ans++;
+    cout<<ans<<nn;
 
     return 0;
 }

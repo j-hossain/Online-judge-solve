@@ -31,11 +31,56 @@ void inline inout()
     #endif
 }
 
+int bigger(li a, li b){
+    return a>b;
+}
+
+    li n,arr[200005],a,b,temp,tr,i;
 
 DN
 {
     fast();
     inout();
+
+    test(){
+        cin>>n;
+        a=b=0;
+        ff(0,n){
+            cin>>arr[i];
+        }
+
+        tr=1;
+
+        sort(arr,arr+n,bigger);
+
+        for(i=0;i<n;i++){
+            if(tr==1){
+                if(arr[i]%2==0)
+                    a+=arr[i];
+                tr=tr^1;
+            }
+            else {
+                if(arr[i]%2){
+                    b+=arr[i];
+                }
+                tr=tr^1;
+            }
+        }
+
+        //cout<<a<<spc<<b<<nn;
+
+        if(a>b)
+            cout<<"Alice\n";
+
+        else if(a<b)
+            cout<<"Bob\n";
+
+        else
+            cout<<"Tie\n";
+
+    }
+
+
 
     return 0;
 }

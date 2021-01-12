@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,31 @@ DN
 {
     fast();
     inout();
+
+    li n,m,k,r,c,temp;
+
+    cin>>n>>m>>k;
+
+    if(k<n){
+        r=k+1;
+        c=1;
+        goto print;
+    }
+
+    k-=(n-1);
+    r = k/(m-1);
+    temp = k%(m-1);
+    r = n-r+1;
+    r-=temp>0;
+    temp = temp==0?m-1:temp;
+    if(r%2)
+        c=m-temp+1;
+    else
+        c = temp+1;
+
+
+    print:
+        cout<<r<<spc<<c<<nn;
 
     return 0;
 }

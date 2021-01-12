@@ -34,8 +34,26 @@ void inline inout()
 
 DN
 {
-    fast();
-    inout();
+    //fast();
+    //inout();
+
+    li n,i,tt;
+    test(){
+        cin>>n;
+        if(n==1)
+            cout<<"9\n";
+        else if(n==2)
+            cout<<"98\n";
+        else{
+            cout<<"989";
+            tt=0;
+            for(i=3;i<n;i++){
+                cout<<(tt%10);
+                tt++;
+            }
+            cout<<nn;
+        }
+    }
 
     return 0;
 }

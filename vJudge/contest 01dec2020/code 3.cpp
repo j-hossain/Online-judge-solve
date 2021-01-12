@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,24 @@ DN
 {
     fast();
     inout();
+
+    vector<li> a;
+    li n,x,i,sq;
+
+    cin>>n>>x;
+    sq = sqrt(n);
+    ff(1,sq+1){
+        if(!(n%i)){
+            a.push_back(i);
+            if((n/i)!=i)
+                a.push_back(n/i);
+        }
+    }
+    sort(a.begin(),a.end());
+    if(a.size()<x)
+        cout<<"-1\n";
+    else
+        cout<<a[x-1]<<nn;
 
     return 0;
 }

@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -36,6 +35,26 @@ DN
 {
     fast();
     inout();
+
+    int n,i,cnt;
+    char inp[130];
+
+    test(){
+        cnt=0;
+        cin>>n>>inp;
+
+        ff(0,n){
+            if(inp[i]=='1')
+                cnt++;
+        }
+
+        cnt+=(120-n);
+
+        if(cnt>=90)
+            cout<<"YES\n";
+        else
+            cout<<"NO\n";
+    }
 
     return 0;
 }

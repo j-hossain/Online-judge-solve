@@ -5,7 +5,6 @@
 #include<vector>
 #include<algorithm>
 #include<string>
-#include<set>
 using namespace std;
 
 #define DN          int main()
@@ -32,10 +31,32 @@ void inline inout()
 }
 
 
+char inp[1000005];
+
 DN
 {
     fast();
     inout();
+    int c1,c2,len,i;
+    test(){
+        cin>>inp;
+        c1=c2=0;
+        for(i=0;inp[i]!='\0';i++){
+            if(inp[i]=='1')
+                c1++;
+            else
+                c2++;
+        }
+
+        if(i%2 || c1==i || c2==i){
+            cout<<"-1\n";
+            continue;
+        }
+
+        len = abs(c2-c1);
+
+        cout<<(len/2)<<nn;
+    }
 
     return 0;
 }
