@@ -7,6 +7,7 @@
 #include<string>
 #include<set>
 using namespace std;
+//not accepted
 
 #define DN          int main()
 #define li          long long int
@@ -31,11 +32,46 @@ void inline inout()
     #endif
 }
 
+int check(int a,int b,int num){
+    int i,tem;
+    for(i=1;i<=10;i++){
+        tem=i*a;
+        if(tem%10==b)
+            return tem;
+    }
+    return num+1;
+}
 
 DN
 {
     fast();
     inout();
-    cout<<"elll\n";
+    int n,i,num,fv,dg,flag,cnt;
+    test(){
+        cin>>n>>fv;
+        ff(0,n){
+            flag=0;
+            cnt=0;
+            cin>>num;
+            while(num && !flag){
+                dg=num%10;
+                if(check(fv,dg,num)<=num)
+                    flag=1;
+                if(dg>=fv)
+                    cnt++;
+                if(cnt>=2)
+                    flag=1;
+                num/=10;
+            }
+            if(flag)
+                cout<<"YES\n";
+            else
+            {
+                cout<<"NO\n";
+            }
+            
+        }
+        
+    }
     return 0;
 }

@@ -36,6 +36,8 @@ DN
 {
     fast();
     inout();
-    cout<<"elll\n";
+
+    
+
     return 0;
 }

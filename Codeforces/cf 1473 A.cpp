@@ -36,6 +36,41 @@ DN
 {
     fast();
     inout();
-    cout<<"elll\n";
+
+    int n,arr[105],i,d,sum,cnt,j;
+    test()
+    {
+        cin>>n>>d;
+        cnt=0;
+        ff(0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]>d)
+                cnt++;
+        }
+
+        if(cnt>0)
+        {
+            sort(arr,arr+n);
+            for(i=0;i<n-1 and arr[i]<d;i++)
+            {
+                for(j=i+1;j<n and arr[j]<d;j++)
+                {
+                    if(arr[i]+arr[j]<=d)
+                    {
+                        cnt=0;
+                        break;
+                    }
+                }
+                if(cnt==0)
+                    break;
+            }
+        }
+
+        if(cnt==0)
+            cout<<"Yes\n";
+        else
+            cout<<"No\n";
+    }
     return 0;
 }

@@ -36,6 +36,37 @@ DN
 {
     fast();
     inout();
-    cout<<"elll\n";
+
+    char a[100005],temp;
+    int i,sum,n,prev;
+    test(){
+        cin>>n;
+        cin>>a;
+        sum=2;
+        prev=-1;
+        ff(0,n){
+            if(a[i]=='0'){
+                if(prev!=1){
+                    cout<<"1";
+                    prev=1;
+                }
+                else{
+                    cout<<"0";
+                    prev=0;
+                }
+            }
+            else{
+                if(prev!=2){
+                    cout<<"1";
+                    prev=2;
+                }
+                else{
+                    cout<<"0";
+                    prev=1;
+                }
+            }
+        }
+        cout<<nn;
+    }
     return 0;
 }
