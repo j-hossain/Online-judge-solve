@@ -57,13 +57,61 @@ void inline inout()
     #endif
 }
 
-void logic(){
+mymy cd[200005];
+map<li,vcc(li)>mp;
+li ans[200005];
+vcc(li)temp;
 
+void logic(){
+    
+    li i,j,n,u,s,sz,msz;
+    inp(n);
+    ff(0,n){
+        inp(cd[i].x);
+    }
+    ff(0,n){
+        inp(cd[i].y);
+    }
+
+    sort(cd,cd+n,cmp);
+
+    ff(0,n){
+        ans[i+1]=0LL;
+        u=cd[i].x;
+        s=cd[i].y;
+        mp[u].push_back(s);
+        sz = mp[u].size();
+        if(sz>1){
+            mp[u][sz-1]+=mp[u][sz-2];
+        }
+    }
+    // for(auto mm:mp){
+    //     outln(mm.first);
+    //     ff(0,mm.second.size())
+    //         outsp(mm.second[i]);
+    //     outln("");
+    // }
+
+    for(auto at:mp){
+        sz = at.second.size();
+        ff(1,sz+1){
+            j=sz/i;
+            j*=i;
+            j--;
+            ans[i]+=at.second[j];
+        }
+    }
+
+    ff(1,n+1)
+        outsp(ans[i]);
+
+    outln("");
+    mp.clear();
 }
 
 DN
 {
-    fast();
+    // fast();
     inout();
  
     test()

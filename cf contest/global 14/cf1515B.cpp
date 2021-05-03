@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -58,7 +59,29 @@ void inline inout()
 }
 
 void logic(){
-
+    li n,x,temp;
+    inp(n);
+    int flag=0;
+    li i=1;
+    while(i<n){
+        i = i<<1;
+        if(i==n){
+            flag=1;
+            break;
+        }
+        else if(n%i==0){
+            x = n/i;
+            temp = sqrt(x);
+            if(temp*temp==x){
+                flag=1;
+                break;
+            }
+        }
+    }
+    if(flag)
+        outln("Yes");
+    else
+        outln("No");
 }
 
 DN

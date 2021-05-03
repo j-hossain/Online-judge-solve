@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -57,8 +58,55 @@ void inline inout()
     #endif
 }
 
-void logic(){
+map<int, int> mp[2];
 
+void logic(){
+    int n,lr[2],i,temp;
+    mp[0].clear();
+    mp[1].clear();
+
+    inp2(n,lr[0],lr[1]);
+    ff(0,lr[0]){
+        inp(temp);
+        mp[0][temp]++;
+    }
+
+    ff(0,lr[1]){
+        inp(temp);
+        if(mp[0][temp]>0){
+            mp[0][temp]--;
+            lr[0]--;
+            lr[1]--;
+            i--;
+        }
+        else
+            mp[1][temp]++;
+    }
+
+    int dif = abs(lr[0]-lr[1]);
+    if(dif==0){
+        outln(lr[0]);
+        return;
+    }
+    int cst = 0;
+    int mm = lr[0]>lr[1]?0:1;
+    dif/=2;
+    for(auto at:mp[mm]){
+        if(at.second>1){
+            int x = at.second/2;
+            x = min(dif,x);
+            dif-=x;
+            cst+=x;
+            lr[mm]-=2*x;
+            at.second-=2*x;
+        }
+        if(dif==0)
+            break;
+    }
+    // outln(cst);
+    cst+=lr[mm];
+
+    outln(cst);
 }
 
 DN

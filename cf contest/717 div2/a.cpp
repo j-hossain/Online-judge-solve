@@ -1,53 +1,30 @@
-#include<algorithm>
-#include<iostream>
-#include<stdlib.h>
 #include<stdio.h>
-#include<utility>
+#include<stdlib.h>
 #include<math.h>
+#include<iostream>
 #include<vector>
+#include<algorithm>
+#include<utility>
 #include<string>
-#include<queue>
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
 #define test()      int t;cin>>t;while(t--)
 #define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);
-#define inp(x)      cin>>x
-#define inp1(x,y)   cin>>x>>y
-#define inp2(x,y,z) cin>>x>>y>>z
-#define pno         cout<<"No\n"     
-#define pys         cout<<"Yes\n"      
-#define out(x)      cout<<x;
-#define outsp(x)    cout<<x<<" "
-#define outln(x)    cout<<x<<"\n"
-#define out2(x,y)   cout<<x<<" "<<y<<"\n";
 
 #define mx          100005
-#define mx2         200005
 #define spc         ' '
 #define nn          "\n"
 
-#define vcc(x)      vector<x>
-#define qq(x)       queue<x>
-
 #define ff(s,e)         for(i=s;i<e;i++)
 #define bf(s,e)         for(i=s;i>e;i--)
-#define ff2(j,s,e)      for(j=s;j<e;j+=1)
-#define bf2(j,s,e)      for(j=s-1;j>=e;j-=1)
+#define ff2(j,s,e,r)    for(j=s;j<e;j+=r)
+#define bf2(j,s,e,r)    for(j=s;j>e;j-=r)
 
-
-typedef struct{
-    li x;
-    li y;
-    // li z;
-}mymy;
-
-int cmp(mymy a, mymy b){
-    return a.y>b.y;
-}
 
 void inline inout()
 {
@@ -57,7 +34,26 @@ void inline inout()
     #endif
 }
 
-void logic(){
+
+void pagoleKinaKore(){
+    int n,arr[105],i,k;
+    test(){
+        cin>>n>>k;
+        for(i=0;i<n;i++)
+            cin>>arr[i];
+        
+        for(i=0;i<n-1;i++){
+            int x = min(arr[i],k);
+            k-=x;
+            arr[i]-=x;
+            arr[n-1]+=x;
+        }
+
+        for(i=0;i<n;i++){
+            cout<<arr[i]<<" ";
+        }
+        cout<<"\n";
+    }
 
 }
 
@@ -65,9 +61,8 @@ DN
 {
     fast();
     inout();
- 
-    test()
-        logic();
+    
+    pagoleKinaKore();
 
     return 0;
 }

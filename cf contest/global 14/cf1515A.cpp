@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -58,6 +59,28 @@ void inline inout()
 }
 
 void logic(){
+    li n,arr[105],i,sum,x;
+    inp1(n,x);
+    ff(0,n)
+        inp(arr[i]);
+    sum=0LL;
+    ff(0,n){
+        sum+=arr[i];
+        if(sum==x){
+            if(i==n-1){
+                outln("No");
+                return;
+            }
+            swap(arr[i],arr[i+1]);
+            i++;
+            sum+=arr[i];
+        }
+    }
+    outln("Yes");
+    ff(0,n){
+        outsp(arr[i]);
+    }
+    outln("");
 
 }
 

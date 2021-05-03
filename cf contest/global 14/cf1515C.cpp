@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -42,7 +43,7 @@ using namespace std;
 typedef struct{
     li x;
     li y;
-    // li z;
+    li z;
 }mymy;
 
 int cmp(mymy a, mymy b){
@@ -57,7 +58,51 @@ void inline inout()
     #endif
 }
 
+mymy blk[mx];
+
 void logic(){
+    li i,j,n,m,x,ans[mx],ms[mx];
+    cin>>n>>m>>x;
+    ff(0,n){
+        inp(blk[i].y);
+        blk[i].x=i;
+        ms[i+1]=0LL;
+    }
+
+    sort(blk,blk+n,cmp);
+
+    i=0;
+    while(i<n){
+        j=0;
+        while(j<m && i+j<n){
+            blk[i+j].z=j+1;
+            ms[j+1]+= blk[i+j].y;
+            j++;
+        }
+        i+=j;
+
+    }
+    int flag=1;
+    ff(2,m){
+        if(abs(ms[i]-ms[i-1])>x || abs(ms[i]-ms[i+1])>x){
+            flag=0;
+            break;
+        }
+    }
+
+    if(!flag){
+        pno;
+        return;
+    }
+    else{
+        pys;
+        ff(0,n){
+            ans[blk[i].x] = blk[i].z;
+        }
+        ff(0,n)
+            outsp(ans[i]);
+        outln("");
+    }
 
 }
 
