@@ -18,8 +18,8 @@ using namespace std;
 #define inp(x)      cin>>x
 #define inp1(x,y)   cin>>x>>y
 #define inp2(x,y,z) cin>>x>>y>>z
-#define pno         cout<<"No\n"     
-#define pys         cout<<"Yes\n"      
+#define pno         cout<<"NO\n"
+#define pys         cout<<"YES\n"
 #define out(x)      cout<<x;
 #define outsp(x)    cout<<x<<" "
 #define outln(x)    cout<<x<<"\n"
@@ -27,6 +27,7 @@ using namespace std;
 
 #define mx          100005
 #define mx2         200005
+#define md          1000000007
 #define spc         ' '
 #define nn          "\n"
 
@@ -52,22 +53,21 @@ int cmp(mymy a, mymy b){
 void inline inout()
 {
     #ifndef ONLINE_JUDGE
-    freopen("C:/Jahin/C programming/Online-judge-solve/input.txt","r",stdin);
-    freopen("C:/Jahin/C programming/Online-judge-solve/output.txt","w",stdout);
+    freopen("D:/Jahin/C programming/Online-judge-solve/input.txt","r",stdin);
+    freopen("D:/Jahin/C programming/Online-judge-solve/output.txt","w",stdout);
     #endif
 }
+
 
 void logic(){
 
 }
-
 DN
 {
     fast();
-    inout();
- 
-    test()
-        logic();
-
+    // inout();
+    // test()
+    //     logic();
+    cout<<"Checking"<<nn;
     return 0;
 }
