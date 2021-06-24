@@ -65,9 +65,8 @@ void logic(){
 DN
 {
     fast();
-    // inout();
-    // test()
-    //     logic();
-    cout<<"Checking"<<nn;
+    inout();
+    test()
+        logic();
     return 0;
 }
