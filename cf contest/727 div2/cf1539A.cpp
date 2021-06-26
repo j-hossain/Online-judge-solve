@@ -23,8 +23,8 @@ using namespace std;
 #define out(x)      cout<<x;
 #define outsp(x)    cout<<x<<" "
 #define outln(x)    cout<<x<<"\n"
-#define out2(x,y)   cout<<x<<" "<<y<<"\n"
-#define pcs         cout<<"Case "<<tk<<": "
+#define out2(x,y)   cout<<x<<" "<<y<<"\n";
+
 #define mx          100005
 #define mx2         200005
 #define md          1000000007
@@ -53,20 +53,21 @@ int cmp(mymy a, mymy b){
 void inline inout()
 {
     #ifndef ONLINE_JUDGE
-    freopen("D:/C programming/Online-judge-solve/input.txt","r",stdin);
-    freopen("D:/C programming/Online-judge-solve/output.txt","w",stdout);
+    freopen("D:/Jahin/C programming/Online-judge-solve/input.txt","r",stdin);
+    freopen("D:/Jahin/C programming/Online-judge-solve/output.txt","w",stdout);
     #endif
 }
 
 
 void logic(){
-    cout<<"helo";
+
 }
+    
 DN
 {
     fast();
     inout();
-    // test()
+    test()
         logic();
     return 0;
 }
