@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-//unsolved
+//accepted
 void inline inout()
 {
     #ifndef ONLINE_JUDGE
@@ -21,7 +21,7 @@ int main(){
         }
 
         for(i=1;i<=n;i++){
-            x=arr[i]>i?arr[i]:i+arr[i];
+            x=arr[i]>i?arr[i]:i+(arr[i]-i%arr[i]);
             y=x-i;
             while(y<i){
                 if(i+y==arr[i]*arr[y])

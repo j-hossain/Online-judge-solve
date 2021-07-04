@@ -10,7 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
-
+//accepted
 #define DN          int main()
 #define li          long long int
 #define uli         unsigned long long int
@@ -26,7 +26,7 @@ using namespace std;
 #define outln(x)    cout<<x<<"\n"
 #define out2(x,y)   cout<<x<<" "<<y<<"\n"
 #define pcs         cout<<"Case "<<tk<<": "
-#define mx          1000005
+#define mx          200005
 #define mx2         200005
 #define md          1000000007
 #define spc         ' '
@@ -62,13 +62,52 @@ void inline inout()
 
 
 void logic(){
+    li n, arr[mx],sum,avg, req,k, got;
+
+    cin>>n;
+    sum=0;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        sum+=arr[i];
+    }
+    sort(arr,arr+n);
+    req=0;
+    if(sum==0){
+        cout<<"0\n";
+        return;
+    }
+    if(sum%n!=0){
+        cout<<"-1\n";
+        return ;
+    }
+    avg = sum/n;
+    for(int i=0;i<n;i++){
+        if(arr[i]<avg){
+            req+=avg-arr[i];
+        }
+        else break;
+    }
+    got=0;
+    k=0;
+    for(int i=n-1;i>=0;i--){
+        if(arr[i]>avg){
+            k++;
+            got+=arr[i]-avg;
+        }
+        if(got==req)
+        break;
+    }
+
+    cout<<k<<"\n";
+    return;
+
 }
 
 DN
 {
     fast();
     inout();
-    // test()
+    test()
         logic();
     
     return 0;
@@ -99,27 +138,6 @@ DN
 //         if (phi[i] == i) {
 //             for (int j = i; j <= n; j += i)
 //                 phi[j] -= phi[j] / i;
-//         }
-//     }
-// }
-
-//faster seive
-// const ll N=1e8;
-
-// vll primes;
-// void optimize_seive()
-// {
-//     vector<bool> vis(N,0);
-//     primes.emplace_back(2);
-//     for(ll i=3 ; i< N ; i+=2)
-//     {
-//         if(vis[i]==0)
-//         {
-//             primes.emplace_back(i);
-//             for(ll j = i*i ; j < N ; j+=2*i)
-//             {
-//                 vis[j]=1;
-//             }
 //         }
 //     }
 // }

@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -26,7 +27,7 @@ using namespace std;
 #define outln(x)    cout<<x<<"\n"
 #define out2(x,y)   cout<<x<<" "<<y<<"\n"
 #define pcs         cout<<"Case "<<tk<<": "
-#define mx          1000005
+#define mx          100000005
 #define mx2         200005
 #define md          1000000007
 #define spc         ' '
@@ -59,23 +60,49 @@ void inline inout()
     #endif
 }
 
+li arr[mx2];
 
 
 void logic(){
+    li n,l,r,cnt;
+    cin>>n>>l>>r;
+    for(li i=0;i<n;i++){
+        cin>>arr[i];
+    }
+
+    sort(arr,arr+n);
+    li ans=0;
+    // for(li i=0;i<n;i++)
+    //     cout<<arr[i]<<" ";
+    // cout<<"\n";
+    for(li i=0;i<n;i++){
+
+        li *up = upper_bound(arr,arr+n,r-arr[i]);
+        li *low = lower_bound(arr,arr+n,l-arr[i]);
+        // cout<<r-arr[i]<<" "<<(up-arr)<<" "<<l-arr[i]<<" "<<(low-arr)<<"\n";
+        ans += up-arr;
+        ans -= low-arr;
+        if(l<=2*arr[i] && 2*arr[i]<=r)
+            ans--;
+    }
+
+    cout<<(ans/2)<<"\n";
+    return;
+    
 }
 
 DN
 {
     fast();
     inout();
-    // test()
+    test()
         logic();
     
     return 0;
 }
 // Ninja techniques
 
-//easyli fond out which bits are on
+//easyly fond out which bits are on
 // int n=4;
 //     int t=(1<<n)-1;
 //     while(t){
@@ -99,27 +126,6 @@ DN
 //         if (phi[i] == i) {
 //             for (int j = i; j <= n; j += i)
 //                 phi[j] -= phi[j] / i;
-//         }
-//     }
-// }
-
-//faster seive
-// const ll N=1e8;
-
-// vll primes;
-// void optimize_seive()
-// {
-//     vector<bool> vis(N,0);
-//     primes.emplace_back(2);
-//     for(ll i=3 ; i< N ; i+=2)
-//     {
-//         if(vis[i]==0)
-//         {
-//             primes.emplace_back(i);
-//             for(ll j = i*i ; j < N ; j+=2*i)
-//             {
-//                 vis[j]=1;
-//             }
 //         }
 //     }
 // }

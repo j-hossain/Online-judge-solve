@@ -10,7 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
-
+//accepted
 #define DN          int main()
 #define li          long long int
 #define uli         unsigned long long int
@@ -62,13 +62,60 @@ void inline inout()
 
 
 void logic(){
+    int n,arr[105],i,f1,f2,mxm,mnm,mxi,mni;
+
+    cin>>n;
+    mxm=0;
+    for(i=0;i<n;i++){
+        cin>>arr[i];
+        if(arr[i]>mxm){
+            mxm=arr[i];
+            mxi=i;
+        }
+    }
+    mnm=arr[0];
+    mni=0;
+    for(i=1;i<n;i++){
+        if(arr[i]<mnm)
+            {
+                mnm=arr[i];
+                mni=i;
+            }
+    }
+    mxi++;
+    mni++;
+    mnm = n-mni+1;
+    mxm = n-mxi+1;
+    // cout<<mni<<" "<<mxi<<"\n";
+    // cout<<mnm<<" "<<mxm<<"\n";
+
+    f1 = mxi<mxm?1:0;
+    f2 = mni<(mnm)?1:0;
+
+    int ans  = min(min(min(max(mxi,mni),max(mxm,mnm)),(mxi+mnm)),(mni+mxm));
+
+    cout<<ans<<"\n";
+
+    // if(f1 && f2){
+    //     cout<<<<"\n";
+    // }
+    // else if(!f1 && !f2){
+    //     cout<<<<"\n";
+    // }
+    // else if(f1 && !f2){
+    //     cout<<<<"\n";
+    // }
+    // else {
+    //     cout<<<<"\n";
+    // }
 }
 
 DN
 {
     fast();
     inout();
-    // test()
+    // cout<<vlc.size()<<"\n";
+    test()
         logic();
     
     return 0;
@@ -99,27 +146,6 @@ DN
 //         if (phi[i] == i) {
 //             for (int j = i; j <= n; j += i)
 //                 phi[j] -= phi[j] / i;
-//         }
-//     }
-// }
-
-//faster seive
-// const ll N=1e8;
-
-// vll primes;
-// void optimize_seive()
-// {
-//     vector<bool> vis(N,0);
-//     primes.emplace_back(2);
-//     for(ll i=3 ; i< N ; i+=2)
-//     {
-//         if(vis[i]==0)
-//         {
-//             primes.emplace_back(i);
-//             for(ll j = i*i ; j < N ; j+=2*i)
-//             {
-//                 vis[j]=1;
-//             }
 //         }
 //     }
 // }
