@@ -17,7 +17,7 @@ using namespace std;
 #define test()      int t;cin>>t;while(t--)
 #define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);
 #define inp(x)      cin>>x
-#define inp1(x,y)   cin>>x>>y
+#define inp1(x,y)   cin>>x>>y//////
 #define inp2(x,y,z) cin>>x>>y>>z
 #define pno         cout<<"NO\n"
 #define pys         cout<<"YES\n"
@@ -47,9 +47,9 @@ typedef struct{
     // li z;
 }mymy;
 
-// int cmp(mymy a, mymy b){
-//     return a.y>b.y;
-// }
+int cmp(mymy a, mymy b){
+    return a.y>b.y;
+}
 
 void inline inout()
 {
@@ -59,14 +59,25 @@ void inline inout()
     #endif
 }
 
+
+
 void logic(){
-    
+    int n,my,got,k;
+    cin>>n>>k;
+    while(n){
+        cout<<n<<"\n";
+        cout.flush();
+        cin>>got;
+        if(got==1)
+            return;
+        n--;
+    }
 }
 
 DN
 {
     fast();
-    inout();
+    // inout();
     test()
         logic();
     

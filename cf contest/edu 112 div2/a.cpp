@@ -10,7 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
-
+//accepted
 #define DN          int main()
 #define li          long long int
 #define uli         unsigned long long int
@@ -59,8 +59,62 @@ void inline inout()
     #endif
 }
 
+li getCount(li n, li a , li b){
+    li temp = n/a;
+    if(n%a!=0)
+        temp++;
+    temp*=b;
+    return temp;
+}
+
 void logic(){
-    
+    li n,mn,temp;
+    cin>>n;
+    if(n<=6){
+        cout<<"15\n";
+        return ;
+    }
+    mn = __LONG_LONG_MAX__;
+    if(n%6==0){
+        mn=(n/6)*15;
+    }
+    else if(n%6<=2){
+        mn = (n/6-1)*15+20;
+    }
+    else if(n%6<=4){
+        mn = (n/6-1)*15+25;
+    }
+    else{
+        mn = (n/6+1)*15;
+    }
+
+    if(n%8==0){
+        mn = min(mn,(n/8)*20);
+    }
+    else if(n%8<=2){
+        mn = min(mn,(n/8-1)*20+25);
+    }
+    else if(n%8<=6){
+        mn = min(mn,(n/8)*20+15);
+    }
+    else{
+        mn = min(mn,(n/8+1)*20) ;
+    }
+
+    if(n%10==0){
+        mn = min(mn,(n/10)*25);
+    }
+    else if(n%10<=6){
+        mn = min(mn,(n/10)*25+15);
+    }
+    else if(n%10<=8){
+        mn = min(mn,(n/10)*25+20);
+    }
+    else{
+        mn = min(mn,(n/10+1)*25) ;
+    }
+    cout<<mn<<"\n";
+
 }
 
 DN

@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -47,9 +48,9 @@ typedef struct{
     // li z;
 }mymy;
 
-// int cmp(mymy a, mymy b){
-//     return a.y>b.y;
-// }
+int cmp(mymy a, mymy b){
+    return a.y>b.y;
+}
 
 void inline inout()
 {
@@ -59,8 +60,21 @@ void inline inout()
     #endif
 }
 
+
+
 void logic(){
-    
+    li n, arr[mx2],sum,x,y;
+    cin>>n;
+    sum=0;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        sum+=arr[i];
+    }
+    x = sum%n;
+    y = n-x;
+    x *=y;
+    cout<<x<<"\n";
+    return;
 }
 
 DN

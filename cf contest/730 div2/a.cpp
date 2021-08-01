@@ -10,6 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
+//accepted
 
 #define DN          int main()
 #define li          long long int
@@ -47,9 +48,9 @@ typedef struct{
     // li z;
 }mymy;
 
-// int cmp(mymy a, mymy b){
-//     return a.y>b.y;
-// }
+int cmp(mymy a, mymy b){
+    return a.y>b.y;
+}
 
 void inline inout()
 {
@@ -59,8 +60,27 @@ void inline inout()
     #endif
 }
 
+
+
 void logic(){
-    
+    li a,b,x,y;
+    cin>>a>>b;
+    if(a==b){
+        x=0;
+        y=0;
+    }
+    else{
+        x = abs(a-b);
+        li mn = min(a,b);
+        if(mn%x==0)
+            y=0;
+        else{
+            a = mn%x;
+            b = x-a;
+            y = min(a,b);
+        }
+    }
+    cout<<x<<" "<<y<<"\n";
 }
 
 DN
