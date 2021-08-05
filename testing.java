@@ -32,3 +32,4 @@ public class testing {
         System.out.println("The lowest value: " + aver);
         System.out.println("The second highest value: " + sec);
     }
+}

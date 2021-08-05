@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Cherry",
+            "request": "launch",
+            "mainClass": "Codeforces.Cherry",
+            "projectName": "Online-judge-solve_16cfc89b"
+        },
+        {
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",

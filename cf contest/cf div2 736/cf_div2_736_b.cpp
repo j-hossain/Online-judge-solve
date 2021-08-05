@@ -10,7 +10,7 @@
 #include<set>
 #include<map>
 using namespace std;
-
+//accepted
 #define DN          int main()
 #define li          long long int
 #define uli         unsigned long long int
@@ -44,14 +44,12 @@ using namespace std;
 typedef struct{
     li x;
     li y;
-    li z;
+    // li z;
 }mymy;
 
-int cmp(mymy a, mymy b){
-    if(a.x!=b.x)
-        return a.x<b.x;
-    return a.y<b.y;
-}
+// int cmp(mymy a, mymy b){
+//     return a.y>b.y;
+// }
 
 void inline inout()
 {
@@ -61,63 +59,59 @@ void inline inout()
     #endif
 }
 
-int mark[mx2];
-set<int>indEd[mx2];
-
-
 void logic(){
-    int n,e,i,u,v,rem,q,tp;
-    cin>>n>>e;
-    for(i=0;i<e;i++){
-        cin>>u>>v;
-        if(u>v)
-            swap(u,v);
-        indEd[u].insert(v);
-    }
-    rem=n;
-    for(i=1;i<=n;i++){
-        if(indEd[i].size()!=0){
-            mark[i]=1;
-            rem--;
-        }
-    }
-    
-    cin>>q;
-    for(i=0;i<q;i++){
-        cin>>tp;
-        if(tp==1){
-            cin>>u>>v;
-            if(u>v)
-                swap(u,v);
-            if(mark[u]==0){
-                rem--;
-                mark[u]=1;
+    int n,aa,bb;
+    cin>>n;
+    string a,b;
+    cin>>a>>b;
+    aa=0;
+    for(int i=0;i<n;i++){
+        if(b[i]=='0')
+            continue;
+        if(i==0){
+            if(a[i]=='0'){
+                aa++;
+                a[i]='2';
             }
-            indEd[u].insert(v);
+            else if(a[i+1]=='1'){
+                a[i+1]='2';
+                aa++;
+            }
         }
-        else if(tp==2){
-            cin>>u>>v;
-            if(u>v)
-                swap(u,v);
-            if(mark[u]==1){
-                if(indEd[u].size()==1){
-                    rem++;
-                    mark[u] = 0;
-                }
-                indEd[u].erase(v);
+        else if(i==n-1){
+            if(a[i]=='0'){
+                aa++;
+                a[i]='2';
+            }
+            else if(a[i-1]=='1'){
+                a[i-1]='2';
+                aa++;
             }
         }
         else{
-            cout<<rem<<"\n";
+            if(a[i]=='0'){
+                aa++;
+                a[i]='2';
+            }
+            else if(a[i-1]=='1'){
+                a[i-1]='2';
+                aa++;
+            }
+            else if(a[i+1]=='1'){
+                a[i+1]='2';
+                aa++;
+            }
         }
     }
+
+    cout<<aa<<"\n";
 }
 
 DN
 {
     fast();
     inout();
-    // test()
+    test()
         logic();
     
     return 0;
