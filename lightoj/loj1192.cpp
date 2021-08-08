@@ -10,7 +10,7 @@ void inline inout()
 }
 
 int main(){
-    inout();
+    // inout();
     int t,n,i,sum,flag,tk=0,x1,x2,temp;
     cin>>t;
     while(t--){
