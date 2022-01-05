@@ -41,6 +41,9 @@ using namespace std;
 #define md 1000000007
 #define spc ' '
 #define nn "\n"
+#define bitOn(list, target) list | (1 << target)
+#define bitOff(list, target) list &(~(1 << target))
+#define bitCheck(list, target) (list & (1 << target)) == (1 << target) ? true : false
 
 #define vcc(x) vector<x>
 #define qq(x) queue<x>
@@ -76,8 +79,8 @@ typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_no
 
 struct mymy
 {
-    int l;
-    int r;
+    int i;
+    int v;
     int mm, mn;
     // string a;
     // li y;
@@ -87,7 +90,7 @@ struct mymy
     // }
     bool operator<(const mymy &a) const
     {
-        return abs(l - r) < abs(a.l - a.r);
+        return v < a.v;
     }
 };
 
@@ -97,6 +100,7 @@ void inline inout()
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
+
 } // predefined common functions
 int findPar(int a, int *color)
 {
@@ -117,23 +121,68 @@ li lcm(li a, li b)
     return (a * b) / gcd(a, b);
 }
 
-void solve()
+int n, helt[16], dp[1 << 16];
+string pw[16];
+
+int getAns(int killed)
 {
-    int n, cnt = 0;
-    cin >> n;
-    int arr[n + 2];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    for (int i = 0; i < n - 1; i += 2)
+    if (killed == (1 << (n + 1)) - 1)
     {
-        int x = abs(arr[i] - arr[i + 1]);
-        if (x != 1 and x != 0 and x != 0.5)
+        // cout << "hello\n";
+        return 0;
+    }
+    if (dp[killed] != -1)
+    {
+        return dp[killed];
+    }
+    int ans = INT32_MAX;
+    for (int i = 1; i <= n; i++)
+    {
+        int c = bitCheck(killed, i);
+        if (!c)
         {
-            // cout << i << " " << abs(arr[i] - arr[i + 1]) << "\n";
-            cnt++;
+            for (int j = 0; j <= n; j++)
+            {
+                int pwi = pw[j][i - 1] - '0';
+                int v = bitCheck(killed, j);
+                if (v and pwi > 0)
+                {
+                    // cout << "helo\n";
+                    int cnt = helt[i] / pwi + (helt[i] % pwi == 0 ? 0 : 1);
+                    if (cnt > 0)
+                    {
+                        int x = bitOn(killed, i);
+                        ans = min(ans, cnt + getAns(x));
+                        // cout << ans << "\n";
+                    }
+                }
+            }
         }
     }
-    cout << cnt << "\n";
+
+    // cout << ans << "\n";
+    return dp[killed] = ans;
+}
+
+void solve()
+{
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> helt[i];
+    }
+    memset(dp, -1, sizeof(dp));
+    for (int i = 0; i < n; i++)
+    {
+        pw[0].push_back('1');
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> pw[i];
+    }
+
+    int ans = getAns(1);
+    cout << ans << "\n";
 }
 
 DN
@@ -143,7 +192,7 @@ DN
     int tc = 1;
     test()
     {
-        // cout << "Case " << tc << ": ";
+        cout << "Case " << tc << ": ";
         solve();
         tc++;
     }

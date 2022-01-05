@@ -15,7 +15,7 @@ using namespace __gnu_pbds;
 using namespace std;
 
 #define DN          int main()
-#define li          long long int
+#define li          unsigned long long int
 #define uli         unsigned long long int
 #define test()      int t;cin>>t;while(t--)
 #define fast()      ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
@@ -38,8 +38,8 @@ using namespace std;
 #define vcc(x)      vector<x>
 #define qq(x)       queue<x>
 
-#define left        st,(st+en)/2,nd*2
-#define right       (st+en)/2+1,en,nd*2+1
+#define left        st,(st+en)/2,nd+nd
+#define right       (st+en)/2+1,en,nd+nd+1
 
 #define ff(s,e)         for(i=s;i<e;i++)
 #define bf(s,e)         for(i=s;i>e;i--)
@@ -71,35 +71,31 @@ void inline inout()
     #endif
 }
 
-li getPow(li n, li p){
-    if(p==0)    return 1%md;
-    li x = getPow(n,p/2)%md;
-    x = (x*x)%md;
-    if(p%2==1) x=(x*n)%md;
-    return x%md;
+
+uli gcd(uli a, uli b){
+    if(b==0)
+        return a;
+    return gcd(b,a%b);
 }
 
-
 void logic(){
-    li n,x,ans;
-    cin>>n;
-    ans=1;
-    x = (1<<n)-2;
-    while(x--){
-        ans = (ans%md *4)%md;
-    }
-        ans = (ans%md *6)%md;
-    cout<<ans<<"\n";
+    uli x,y,m,n;
+    cin>>x>>y>>m;
+    x-=m;
+    y-=m;
+    // cout<<a<<spc<<b<<'\n';
+    n = __gcd(x,y);
+    cout<<n<<"\n";
 }
 DN
 {
     fast();
     // inout();
     int tc = 1; 
-    // test(){
+    test(){
         // cout<<"Case "<<tc<<":"<<nn;
         logic();
-    // }
+    }
     
     return 0;
 }

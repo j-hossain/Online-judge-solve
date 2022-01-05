@@ -15,11 +15,13 @@ void inline inout()
 li maxIf[18][1<<17];
 li inp[18][18],n;
 
+
 li getMax(int row, int colsTaken){
     li mxR = -1;
     if(row>n){
         return 0;
     }
+
     if(maxIf[row][colsTaken]!=-1){
         return maxIf[row][colsTaken];
     }

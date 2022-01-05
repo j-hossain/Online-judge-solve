@@ -1,26 +1,40 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Launch Cherry",
-            "request": "launch",
-            "mainClass": "Codeforces.Cherry",
-            "projectName": "Online-judge-solve_16cfc89b"
-        },
-        {
-            "name": "(Windows) Launch",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/a.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch stopwatch",
+      "request": "launch",
+      "mainClass": "stopwatch",
+      "projectName": "Online-judge-solve_16cfc89b"
+    },
+    {
+      "type": "java",
+      "name": "Launch testing",
+      "request": "launch",
+      "mainClass": "testing",
+      "projectName": "Online-judge-solve_16cfc89b"
+    },
+    {
+      "type": "java",
+      "name": "Launch Cherry",
+      "request": "launch",
+      "mainClass": "Codeforces.Cherry",
+      "projectName": "Online-judge-solve_16cfc89b"
+    },
+    {
+      "name": "(Windows) Launch",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "enter program name, for example ${workspaceFolder}/a.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false
+    }
+  ]
 }

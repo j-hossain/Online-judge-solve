@@ -1,3 +1,4 @@
+// accepted
 #include <algorithm>
 #include <iostream>
 #include <stdlib.h>
@@ -76,8 +77,8 @@ typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_no
 
 struct mymy
 {
-    int l;
-    int r;
+    int i;
+    int v;
     int mm, mn;
     // string a;
     // li y;
@@ -87,7 +88,7 @@ struct mymy
     // }
     bool operator<(const mymy &a) const
     {
-        return abs(l - r) < abs(a.l - a.r);
+        return v < a.v;
     }
 };
 
@@ -97,12 +98,6 @@ void inline inout()
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
-} // predefined common functions
-int findPar(int a, int *color)
-{
-    if (color[a] == a)
-        return a;
-    return color[a] = findPar(color[a], color);
 }
 
 li gcd(li a, li b)
@@ -117,23 +112,43 @@ li lcm(li a, li b)
     return (a * b) / gcd(a, b);
 }
 
+int dp[101][101];
+
+string a;
+
+int getAns(int i, int j)
+{
+    if (i >= j)
+    {
+        return dp[i][j] = 0;
+    }
+
+    if (dp[i][j] != -1)
+    {
+        return dp[i][j];
+    }
+
+    if (a[i] == a[j])
+    {
+        return dp[i][j] = getAns(i + 1, j - 1);
+    }
+
+    return dp[i][j] = 1 + min(getAns(i + 1, j), getAns(i, j - 1));
+}
+
 void solve()
 {
-    int n, cnt = 0;
-    cin >> n;
-    int arr[n + 2];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    for (int i = 0; i < n - 1; i += 2)
+
+    for (int i = 0; i < 101; i++)
     {
-        int x = abs(arr[i] - arr[i + 1]);
-        if (x != 1 and x != 0 and x != 0.5)
+        for (int j = 0; j < 101; j++)
         {
-            // cout << i << " " << abs(arr[i] - arr[i + 1]) << "\n";
-            cnt++;
+            dp[i][j] = -1;
         }
     }
-    cout << cnt << "\n";
+    cin >> a;
+    int ans = getAns(0, a.size() - 1);
+    cout << ans << "\n";
 }
 
 DN
@@ -143,7 +158,7 @@ DN
     int tc = 1;
     test()
     {
-        // cout << "Case " << tc << ": ";
+        cout << "Case " << tc << ": ";
         solve();
         tc++;
     }

@@ -1,16 +1,18 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"files.associations": {
-			"iostream": "cpp",
-			"random": "cpp",
-			"limits": "cpp",
-			"vector": "cpp",
-			"ios": "cpp"
-		}
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.associations": {
+      "*.ejs": "html",
+      "iostream": "cpp",
+      "random": "cpp",
+      "limits": "cpp",
+      "vector": "cpp",
+      "ios": "cpp",
+      "list": "cpp"
+    }
+  }
 }

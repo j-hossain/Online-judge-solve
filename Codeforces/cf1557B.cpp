@@ -1,7 +1,7 @@
 #include<iostream>
 #include<algorithm>
 using namespace std;
-
+//accepted
 void inline inout()
 {
     #ifndef ONLINE_JUDGE
@@ -31,7 +31,7 @@ int main(){
             arr[i].i = i;
         }
         sort(arr,arr+n);
-        mk=0;
+        mk=1;
         for(int i=0;i<n-1;i++){
             if(arr[i+1].i-arr[i].i!=1){
                 mk++;
