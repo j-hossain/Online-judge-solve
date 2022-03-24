@@ -1,193 +1,154 @@
-#include <algorithm>
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <utility>
-#include <math.h>
-#include <vector>
-#include <string>
-#include <queue>
-#include <set>
-#include <map>
+/*
+    ▀ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ▀
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░█▀▀▄▄░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░▀▀▄░░░░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░░░░▀▄░░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░░░░░░█░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░░░░░░█░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░░░░▄▀░░░░░░░░░░░░░
+    ░░░░░░░░░█░░░░▄▄▀░░░░░░░░░░░░░░░
+    ░░░░░░░░░█▄▄▀▀░░░░JOKER░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ▄ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ▄
+*/
+
+// including all header files
+#include <bits/stdc++.h>
+
+//<for policy based data structure>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
+//</for policy based data structure>
+
 using namespace std;
 
-#define DN int main()
-#define li long long int
+// <for runtime show>
+using namespace std::chrono;
+
+#define t_start auto start = high_resolution_clock::now();
+#ifndef ONLINE_JUDGE
+#define t_show auto stop = high_resolution_clock::now();auto duration = duration_cast<milliseconds>(stop - start);cout << "Time taken by function: " << duration.count() << " milliseconds" << endl;
+#else
+#define t_show
+#endif
+// </for runtime show>
+
+//<for debug config>
+#ifndef ONLINE_JUDGE
+#define debug(x) cout << #x << " " << x << "\n";
+#else
+#define debug(x)
+#endif
+//</for debug config>
+
+//<shortcut macros>
+#define li  long long int
 #define uli unsigned long long int
-#define test() \
-    int t;     \
-    cin >> t;  \
-    while (t--)
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
-#define inp(x) cin >> x
-#define inp1(x, y) cin >> x >> y
-#define inp2(x, y, z) cin >> x >> y >> z
+
+// most used numbers
+const int MM = 1e5 + 3;
+const int MD = 1e9 + 7;
+const double PI = acos(0);
+
+// loops
+#define ff(i, e)        for (li i = 0; i < e; i++)
+#define bf(i, s)        for (li i = s - 1; i >= 0; i--)
+#define ff2(j, s, e)    for (li j = s; j < e; j++)
+#define bf2(j, s, e)    for (li j = s - 1; j >= e; j--)
+
+// runs test cases
+#define test() int TT;cin >> TT;for (int TK = 1; TK <= TT; TK++)
+
+// for faster cin cout
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+// outputs simplified
 #define pno cout << "NO\n"
 #define pys cout << "YES\n"
-#define out(x) cout << x;
-#define outsp(x) cout << x << " "
-#define outln(x) cout << x << "\n"
-#define out2(x, y) cout << x << " " << y << "\n"
-#define pcs cout << "Case " << tk << ": "
-#define mx 100005
-#define mx2 200005
-#define md 1000000007
-#define spc ' '
-#define nn "\n"
+#define pcs cout << "Case " << TK << ": "
+#define SS  ' '
+#define NN  '\n'
 
-#define vcc(x) vector<x>
-#define qq(x) queue<x>
+void out(auto x)                                    {cout << x}
+void out(auto x, char ender)                        {out(x);out(ender);}
+void out(auto x, auto y, char ender)                {out(x, SS);out(y, ender);}
+void out(auto x, auto y, auto z, char ender)        {out(x, SS);out(y, SS);out(z, ender);}
+void out(auto x, auto y, auto z, auto a, char ender){out(x, SS);out(y, SS);out(z, SS);out(a, ender);}
 
-#define left st, (st + en) / 2, nd * 2
-#define right (st + en) / 2 + 1, en, nd * 2 + 1
+// arrays simplified
+#define ARIN(arr, n)    ff(i, n)cin >> arr[i];
+#define AROUT(arr, n)   ff(i, n)out(arr[i]);
 
-#define ff(s, e) for (i = s; i < e; i++)
-#define bf(s, e) for (i = s; i > e; i--)
-#define ff2(j, s, e) for (j = s; j < e; j += 1)
-#define bf2(j, s, e) for (j = s - 1; j >= e; j -= 1)
+// order is 1 for ascending and -1 for descending
+bool ISSORTED(auto arr, auto n, int order){ff2(i, 1, n){if (order == 1){if (arr[i] - arr[i - 1] < 0)return false;}else{if (arr[i] - arr[i - 1] > 0)return false;}}return true;}
 
+
+// template declarations simplified
+#define vcc(x)      vector<x>
+#define qq(x)       queue<x>
+#define MP(a, b)    make_pair(a, b)
+#define PP(vec, x)  vec.push_back(x)
+#define ALL(x)      x.begin(), x.end()
+#define VIP(vec, x) cin >> x;PP(vec, x)
+//</shortcut macros>
+
+// for segmentation
+#define left    st, (st + en) / 2, nd * 2
+#define right   (st + en) / 2 + 1, en, nd * 2 + 1
+
+// ordered set
 typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 
-struct mymy
-{
+// custom tuple class
+class mtup{
+public:
     int i;
     int v;
-    int mm, mn;
-    // string a;
-    // li y;
-    // li z;
-    // void getZ(){
-    //     z = (y-x+1)%2;
-    // }
-    bool operator<(const mymy &a) const
-    {
+    mtup(int a = 0, int b = 0){
+        i = a;
+        v = b;
+    }
+    bool operator<(const mtup &a) const{
         return v < a.v;
+    }
+    bool operator>(const mtup &a) const{
+        return v > a.v;
     }
 };
 
-void inline inout()
-{
+// for file input output
+void inline inout(){
 #ifndef ONLINE_JUDGE
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
 
-li arr[mx];
-string grph[mx];
-int n,m;
-int I[] = {0,1,0,-1};
-int J[] = {1,0,-1,0};
-
-int dfs(int i,int j){
-    int cnt=0;
-    for(int k=0;k<4;k++){
-        int tempi = i+I[k];
-        int tempj = j+J[k];
-        if(tempi!=i and tempj!=j){
-            if(tempi>=0 and tempj>=0 and tempi<n and tempj<n){
-                cnt++;
-            }
-        }
-    }
-
-    if(cnt<=1){
-
-    }
+void answer(){
+    
 }
+// remember these points
+//  -> check if li is needed
+//  -> check the constrains
+//  -> check the if the value can be 0
+//  -> check if the vectors, sets, maps are cleared
+//  -> check if 0 is initialized to the counter or sum
 
-void logic()
-{
-    int posi,posj;
-    cin>>n>>m;
-    for(int i=0;i<n;i++){
-        cin>>grph[i];
-    }
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grph[i][j]=='L'){
-                posi = i;
-                posj = j;
-            } 
-        }
-    }
-
-    dfs(posi,posj);
-
-}
-DN
-{
+int main(){
     fast();
     inout();
-    test()
-        logic();
+    t_start;
+    // for no test case
+    // answer();
+
+    // when test cases exist
+    test(){
+        // pcs;
+        answer();
+    }
+    // t_show;
 
     return 0;
 }
-// Ninja techniques
-
-// easyli fond out which bits are on
-//  int n=4;
-//      int t=(1<<n)-1;
-//      while(t){
-//          cout<<"First t: "<<t<<"\n";
-//          int k=t&-t;
-//           k=t&-t denotes the lowest on bit
-//          cout<<"k: "<<k<<"\n";
-//          t-=k;
-//          cout<<"Second t: "<<t<<"\n";
-//      }
-
-// eulers toitient Function
-//  void phi_1_to_n(int n) {
-//      vector<int> phi(n + 1);
-//      phi[0] = 0;
-//      phi[1] = 1;
-//      for (int i = 2; i <= n; i++)
-//          phi[i] = i;
-
-//     for (int i = 2; i <= n; i++) {
-//         if (phi[i] == i) {
-//             for (int j = i; j <= n; j += i)
-//                 phi[j] -= phi[j] / i;
-//         }
-//     }
-// }
-
-// faster seive
-//  const ll N=1e8;
-
-// vll primes;
-// void optimize_seive()
-// {
-//     vector<bool> vis(N,0);
-//     primes.emplace_back(2);
-//     for(ll i=3 ; i< N ; i+=2)
-//     {
-//         if(vis[i]==0)
-//         {
-//             primes.emplace_back(i);
-//             for(ll j = i*i ; j < N ; j+=2*i)
-//             {
-//                 vis[j]=1;
-//             }
-//         }
-//     }
-// }
-// O(n) time subarray sum from https://www.geeksforgeeks.org/sum-of-all-subarrays/
-// long int SubArraySum( int arr[] , int n )
-// {
-//     long int result = 0;
-
-//     // computing sum of subarray using formula
-//     for (int i=0; i<n; i++)
-//         result += (arr[i] * (i+1) * (n-i));
-
-//     // return all subarray sum
-//     return result ;
-// }

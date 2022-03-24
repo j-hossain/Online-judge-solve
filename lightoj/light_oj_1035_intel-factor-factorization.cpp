@@ -1,3 +1,4 @@
+// acccepted
 #include <algorithm>
 #include <iostream>
 #include <stdlib.h>
@@ -97,7 +98,9 @@ void inline inout()
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
-} // predefined common functions
+}
+
+// predefined common functions
 int findPar(int a, int *color)
 {
     if (color[a] == a)
@@ -117,23 +120,66 @@ li lcm(li a, li b)
     return (a * b) / gcd(a, b);
 }
 
-void solve()
+void primeFactorisationWithPower(vcc(int) & nums, vcc(int) & power, int n)
 {
-    int n, cnt = 0;
-    cin >> n;
-    int arr[n + 2];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    for (int i = 0; i < n - 1; i += 2)
+    int i, j;
+    ff(i, sqrt(n) + 1)
     {
-        int x = abs(arr[i] - arr[i + 1]);
-        if (x != 1 and x != 0 and x != 0.5)
+        if (n % i == 0)
         {
-            // cout << i << " " << abs(arr[i] - arr[i + 1]) << "\n";
-            cnt++;
+            nums.push_back(i);
+            power.push_back(1);
+            n /= i;
+            while (n % i == 0)
+            {
+                power[power.size() - 1]++;
+                n /= i;
+            }
         }
     }
-    cout << cnt << "\n";
+}
+
+void solve()
+{
+    int n, mp[105];
+    cin >> n;
+    for (int i = 0; i < 105; i++)
+    {
+        mp[i] = 0;
+    }
+    for (int i = 2; i <= n; i++)
+    {
+        int temp = i;
+        for (int j = 2; j <= sqrt(temp); j++)
+        {
+            if (temp % j == 0)
+            {
+                while (temp % j == 0)
+                {
+                    temp /= j;
+                    mp[j]++;
+                }
+            }
+        }
+        if (temp != 0)
+            mp[temp]++;
+    }
+    cout << n << " =";
+    int flag = 0;
+    for (int i = 2; i <= n; i++)
+    {
+        if (mp[i])
+        {
+            if (flag)
+            {
+                cout << " *";
+            }
+            else
+                flag = 1;
+            cout << " " << i << " (" << mp[i] << ")";
+        }
+    }
+    cout << "\n";
 }
 
 DN
@@ -143,7 +189,7 @@ DN
     int tc = 1;
     test()
     {
-        // cout << "Case " << tc << ": ";
+        cout << "Case " << tc << ": ";
         solve();
         tc++;
     }

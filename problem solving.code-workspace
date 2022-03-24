@@ -12,7 +12,18 @@
       "limits": "cpp",
       "vector": "cpp",
       "ios": "cpp",
-      "list": "cpp"
+      "list": "cpp",
+      "utility": "cpp",
+      "cmath": "cpp",
+      "chrono": "cpp",
+      "array": "cpp",
+      "*.tcc": "cpp",
+      "memory": "cpp",
+      "functional": "cpp",
+      "future": "cpp",
+      "istream": "cpp",
+      "tuple": "cpp",
+      "bitset": "cpp"
     }
   }
 }

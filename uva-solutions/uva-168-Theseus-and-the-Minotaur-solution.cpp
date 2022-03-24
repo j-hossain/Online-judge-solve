@@ -26,10 +26,13 @@ using namespace std;
 
 // <for runtime show>
 using namespace std::chrono;
-
-#define t_start auto start = high_resolution_clock::now();
+#define t_start \
+    auto start = high_resolution_clock::now();
 #ifndef ONLINE_JUDGE
-#define t_show auto stop = high_resolution_clock::now();auto duration = duration_cast<milliseconds>(stop - start);cout << "Time taken by function: " << duration.count() << " milliseconds" << endl;
+#define t_show                                                 \
+    auto stop = high_resolution_clock::now();                  \
+    auto duration = duration_cast<microseconds>(stop - start); \
+    cout << "Time taken by function: " << duration.count() << " microseconds" << endl;
 #else
 #define t_show
 #endif
@@ -37,98 +40,131 @@ using namespace std::chrono;
 
 //<for debug config>
 #ifndef ONLINE_JUDGE
-#define debug(x) cout << #x << " " << x << "\n";
+#define debug(x) \
+    cout << #x << " " << x << "\n";
 #else
 #define debug(x)
 #endif
+template <typename _er>
+void _print(_er t)
+{
+    cout << t;
+}
 //</for debug config>
 
 //<shortcut macros>
-#define li  long long int
-#define uli unsigned long long int
-
-// most used numbers
-const int MM = 1e5 + 3;
-const int MD = 1e9 + 7;
-const double PI = acos(0);
+#define li \
+    long long int
+#define uli \
+    unsigned long long int
 
 // loops
-#define ff(i, e)        for (li i = 0; i < e; i++)
-#define bf(i, s)        for (li i = s - 1; i >= 0; i--)
-#define ff2(j, s, e)    for (li j = s; j < e; j++)
-#define bf2(j, s, e)    for (li j = s - 1; j >= e; j--)
+#define ff(i, e) \
+    for (int i = 0; i < e; i++)
+#define bf(i, s) \
+    for (int i = s - 1; i >= 0; i--)
+#define ff2(j, s, e) \
+    for (int j = s; j < e; j++)
+#define bf2(j, s, e) \
+    for (int j = s - 1; j >= e; j--)
 
 // runs test cases
-#define test() int TT;cin >> TT;for (int TK = 1; TK <= TT; TK++)
+#define test() \
+    int TT;    \
+    cin >> TT; \
+    for (int TK = 1; TK <= TT; TK++)
 
 // for faster cin cout
-#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define fast()                    \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
 
 // outputs simplified
-#define pno cout << "NO\n"
-#define pys cout << "YES\n"
-#define pcs cout << "Case " << TK << ": "
-#define SS  ' '
-#define NN  '\n'
+#define pno \
+    cout << "NO\n"
+#define pys \
+    cout << "YES\n"
+#define out(x) \
+    cout << x << " "
+#define outln(x) \
+    cout << x << "\n"
+#define out2(x, y) \
+    cout << x << " " << y << "\n"
+#define pcs \
+    cout << "Case " << TK << ": "
+#define SS \
+    ' '
+#define NN \
+    "\n"
 
-void out(auto x)                                    {cout << x}
-void out(auto x, char ender)                        {out(x);out(ender);}
-void out(auto x, auto y, char ender)                {out(x, SS);out(y, ender);}
-void out(auto x, auto y, auto z, char ender)        {out(x, SS);out(y, SS);out(z, ender);}
-void out(auto x, auto y, auto z, auto a, char ender){out(x, SS);out(y, SS);out(z, SS);out(a, ender);}
+// inputs simplified
+#define ARIN(arr, n)   \
+    ff(i, n)           \
+    {                  \
+        cin >> arr[i]; \
+    }
+#define AROUT(arr, n) \
+    ff(i, n)          \
+    {                 \
+        out(arr[i]);  \
+    }
 
-// arrays simplified
-#define ARIN(arr, n)    ff(i, n)cin >> arr[i];
-#define AROUT(arr, n)   ff(i, n)out(arr[i]);
-
-// order is 1 for ascending and -1 for descending
-bool ISSORTED(auto arr, auto n, int order){ff2(i, 1, n){if (order == 1){if (arr[i] - arr[i - 1] < 0)return false;}else{if (arr[i] - arr[i - 1] > 0)return false;}}return true;}
-
+// most used numbers
+#define MM (int)(1e5 + 3)
+#define MD (int)(1e9 + 7)
+#define PI acos(0)
 
 // template declarations simplified
-#define vcc(x)      vector<x>
-#define qq(x)       queue<x>
-#define MP(a, b)    make_pair(a, b)
-#define PP(vec, x)  vec.push_back(x)
-#define ALL(x)      x.begin(), x.end()
-#define VIP(vec, x) cin >> x;PP(vec, x)
+#define vcc(x) vector<x>
+#define qq(x) queue<x>
+#define MP(a, b) make_pair(a, b)
+#define PP(vec, x) vec.push_back(x)
+#define ALL(x) x.begin(), x.end()
+#define VIP(vec, x) \
+    cin >> x;       \
+    PP(vec, x)
 //</shortcut macros>
 
 // for segmentation
-#define left    st, (st + en) / 2, nd * 2
-#define right   (st + en) / 2 + 1, en, nd * 2 + 1
+#define left st, (st + en) / 2, nd * 2
+#define right (st + en) / 2 + 1, en, nd * 2 + 1
 
 // ordered set
 typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 
 // custom tuple class
-class mtup{
-public:
+class mtup
+{
     int i;
     int v;
-    mtup(int a = 0, int b = 0){
+    mtup(int a, int b)
+    {
         i = a;
         v = b;
     }
-    bool operator<(const mtup &a) const{
+    bool operator<(const mtup &a) const
+    {
         return v < a.v;
     }
-    bool operator>(const mtup &a) const{
+    bool operator>(const mtup &a) const
+    {
         return v > a.v;
     }
 };
-
 // for file input output
-void inline inout(){
+void inline inout()
+{
 #ifndef ONLINE_JUDGE
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
 
-void answer(){
-    
+void answer()
+{
 }
+
 // remember these points
 //  -> check if li is needed
 //  -> check the constrains
@@ -136,7 +172,8 @@ void answer(){
 //  -> check if the vectors, sets, maps are cleared
 //  -> check if 0 is initialized to the counter or sum
 
-int main(){
+int main()
+{
     fast();
     inout();
     t_start;
@@ -144,11 +181,12 @@ int main(){
     // answer();
 
     // when test cases exist
-    test(){
+    test()
+    {
         // pcs;
         answer();
     }
-    // t_show;
+    t_show;
 
     return 0;
 }
