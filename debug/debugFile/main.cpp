@@ -1,3 +1,5 @@
+// look for answer function for solution
+
 // including all header files
 #include <bits/stdc++.h>
 
@@ -66,11 +68,18 @@ void inline inout(){
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
- 
-
 
 void answer(){
-
+    int n;
+    cin>>n;
+    int arr[n+2];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    for(int i=1;i<n;i++){
+        arr[i]+=arr[i-1];
+    }
+    cout<<"Hello\n";
 }
 // remember these points
 //  -> check if li is needed

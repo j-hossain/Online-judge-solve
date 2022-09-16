@@ -1,18 +1,3 @@
-/*
-    ▀ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ▀
-    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    ░░░░░░░░░█▀▀▄▄░░░░░░░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░▀▀▄░░░░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░░░░▀▄░░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░░░░░░█░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░░░░░░█░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░░░░▄▀░░░░░░░░░░░░░
-    ░░░░░░░░░█░░░░▄▄▀░░░░░░░░░░░░░░░
-    ░░░░░░░░░█▄▄▀▀░░░░JOKER░░░░░░░░░
-    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    ▄ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ▄
-*/
-
 // including all header files
 #include <bits/stdc++.h>
 
@@ -35,14 +20,6 @@ using namespace std::chrono;
 #endif
 // </for runtime show>
 
-//<for debug config>
-#ifndef ONLINE_JUDGE
-#define debug(x) cout << #x << " " << x << "\n";
-#else
-#define debug(x)
-#endif
-//</for debug config>
-
 //<shortcut macros>
 #define li  long long int
 #define uli unsigned long long int
@@ -52,11 +29,9 @@ const int MM = 1e5 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
-// loops
-#define ff(i, e)        for (li i = 0; i < e; i++)
-#define bf(i, s)        for (li i = s - 1; i >= 0; i--)
-#define ff2(j, s, e)    for (li j = s; j < e; j++)
-#define bf2(j, s, e)    for (li j = s - 1; j >= e; j--)
+//direction array
+int dx[]= {-1, 1, 0, 0, -1,-1, 1, 1};
+int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
 
 // runs test cases
 #define test() int TT;cin >> TT;for (int TK = 1; TK <= TT; TK++)
@@ -65,58 +40,24 @@ const double PI = acos(0);
 #define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
 // outputs simplified
-#define pno cout << "NO\n"
-#define pys cout << "YES\n"
 #define pcs cout << "Case " << TK << ": "
 #define SS  ' '
 #define NN  '\n'
 
-void out(auto x)                                    {cout << x}
-void out(auto x, char ender)                        {out(x);out(ender);}
-void out(auto x, auto y, char ender)                {out(x, SS);out(y, ender);}
-void out(auto x, auto y, auto z, char ender)        {out(x, SS);out(y, SS);out(z, ender);}
-void out(auto x, auto y, auto z, auto a, char ender){out(x, SS);out(y, SS);out(z, SS);out(a, ender);}
-
-// arrays simplified
-#define ARIN(arr, n)    ff(i, n)cin >> arr[i];
-#define AROUT(arr, n)   ff(i, n)out(arr[i]);
-
-// order is 1 for ascending and -1 for descending
-bool ISSORTED(auto arr, auto n, int order){ff2(i, 1, n){if (order == 1){if (arr[i] - arr[i - 1] < 0)return false;}else{if (arr[i] - arr[i - 1] > 0)return false;}}return true;}
-
-
 // template declarations simplified
-#define vcc(x)      vector<x>
-#define qq(x)       queue<x>
-#define MP(a, b)    make_pair(a, b)
-#define PP(vec, x)  vec.push_back(x)
-#define ALL(x)      x.begin(), x.end()
-#define VIP(vec, x) cin >> x;PP(vec, x)
-//</shortcut macros>
+#define pair<int,int>   pii
+#define pair<li,li>     pll
+#define MP(a, b)        make_pair(a, b)
+#define PP(x)           push_back(x)
+#define ALL(x)          x.begin(), x.end()
 
 // for segmentation
 #define left    st, (st + en) / 2, nd * 2
 #define right   (st + en) / 2 + 1, en, nd * 2 + 1
+//</shortcut macros>
 
 // ordered set
 typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
-
-// custom tuple class
-class mtup{
-public:
-    int i;
-    int v;
-    mtup(int a = 0, int b = 0){
-        i = a;
-        v = b;
-    }
-    bool operator<(const mtup &a) const{
-        return v < a.v;
-    }
-    bool operator>(const mtup &a) const{
-        return v > a.v;
-    }
-};
 
 // for file input output
 void inline inout(){
@@ -126,8 +67,79 @@ void inline inout(){
 #endif
 }
 
+li arr[505][505],brr[505][505];
+li pa[505][505],pb[505][505];
+li uptil[505][505];
+li rmx[505],valc[505];
+li n,m;
+
 void answer(){
-    
+	cin>>n>>m;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			cin>>arr[i][j];
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			cin>>brr[i][j];
+		}
+	}
+	for(int j=0;j<m;j++){
+		pa[0][j] = arr[0][j];
+		for(int i=1;i<n;i++){
+			pa[i][j] = pa[i-1][j]+arr[i][j];
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=m-2;j>=0;j--){
+			pa[i][j] += pa[i][j+1];
+		}
+	}
+	for(int j=0;j<m;j++){
+		pb[0][j] = brr[0][j];
+		for(int i=1;i<n;i++){
+			pb[i][j] = pb[i-1][j]+brr[i][j];
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=m-2;j>=0;j--){
+			pb[i][j] += pb[i][j+1];
+		}
+	}
+
+	li ans = pa[n-1][0];
+	for(int i=0;i<n;i++) rmx[i]=-1;
+	for(int j=m-1;j>=0;j--){
+		if(pa[n-1][0]-pa[n-1][j]+pb[n-1][j]>=ans){
+			rmx[n-1]=j;
+			ans = pa[n-1][0]-pa[n-1][j]+pb[n-1][j];
+			valc[j] = pa[n-1][j]-pb[n-1][j];
+			continue;
+		}
+		li lc = rmx[n-1];
+		li lr = n-1;
+		li rad=0;
+		li urn=0;
+		for(int i=n-2;i>=0;i--){
+			// li temp_rad=0;
+			// li temp_urn=0;
+			if(lc==-1){
+				rad = pb[i][j];
+				urn = pa[i][j];
+			}
+			else{
+				rad = pb[i][j]-pb[i][lc];
+				urn = pa[i][j]-pa[i][lc];
+			}
+			if(pa[n-1][0]-rad+urn+valc[lc]>=ans){
+				rmx[i]=j;
+				ans = pa[n-1][0]-rad+urn+valc[lc];
+				valc[j] = valc[lc]+pa[n-1][j]-pb[n-1][j];
+				break;
+			}
+		}
+	}
 }
 // remember these points
 //  -> check if li is needed
@@ -139,16 +151,16 @@ void answer(){
 int main(){
     fast();
     inout();
-    t_start;
-    // for no test case
-    // answer();
+//    t_start;
+//     for no test case
+//     answer();
 
-    // when test cases exist
+//     when test cases exist
     test(){
-        // pcs;
+//         pcs;
         answer();
     }
-    // t_show;
+//     t_show;
 
     return 0;
 }

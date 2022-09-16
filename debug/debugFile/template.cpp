@@ -66,8 +66,6 @@ void inline inout(){
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
- 
-
 
 void answer(){
 

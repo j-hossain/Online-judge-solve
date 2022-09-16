@@ -45,8 +45,8 @@ int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
 #define NN  '\n'
 
 // template declarations simplified
-#define pair<int,int>   pii
-#define pair<li,li>     pll
+#define pii             pair<int,int> 
+#define pll             pair<li,li>
 #define MP(a, b)        make_pair(a, b)
 #define PP(x)           push_back(x)
 #define ALL(x)          x.begin(), x.end()
@@ -66,11 +66,30 @@ void inline inout(){
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
- 
 
+unordered_map<string, int> mp;
 
 void answer(){
-
+    int t;
+    cin>>t;
+    for(int tt=1;tt<=t;tt++){
+        int ans=0;
+        int n;
+        cin>>n;
+        string x;
+        mp.clear();
+        for(int i=0;i<n;i++){
+            cin>>x;
+            string temp;
+            for(int j=0;j<x.size();j++){
+                temp.push_back(x[j]);
+                // cout<<temp<<"\n";    
+                mp[temp]++;
+                ans = max(ans,mp[temp]*(j+1));
+            }
+        }
+        cout<<"Case "<<tt<<": "<<ans<<"\n";
+    }
 }
 // remember these points
 //  -> check if li is needed
@@ -81,16 +100,16 @@ void answer(){
 
 int main(){
     fast();
-    inout();
+    // inout();
 //    t_start;
 //     for no test case
-//     answer();
+    answer();
 
 //     when test cases exist
-    test(){
-//         pcs;
-        answer();
-    }
+//     test(){
+// //         pcs;
+//         answer();
+//     }
 //     t_show;
 
     return 0;
