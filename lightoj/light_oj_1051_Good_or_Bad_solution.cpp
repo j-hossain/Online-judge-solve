@@ -67,29 +67,71 @@ void inline inout(){
 #endif
 }
 
-double mem[505][505];
- 
-double getAns(int r,int b){
+int arr[55];
+int mem[55][55][55];
+int n;
 
-    if(mem[r][b]!=-1) return mem[r][b];
-    double ans = 0.0;
-    if(r>0 and b>1){
-        ans+=((double)r/(r+b))*getAns(r-1,b-1);
-    }
-    if(b>2){
-        ans+=((double)b/(r+b))*getAns(r,b-2);
-    }
-    if(b==1){
-        ans+=(b/(r+b));
-    }
-    return mem[r][b] = ans;
+int getAns(int p, int o, int z){
+	if(p==n) return 0;
+	// cout<<arr[p]<<"\n";
+	if(mem[p][o][z]!=-1) return mem[p][o][z];
+	int ret=0;
+	int oo=0;
+	int zz=0;
+	if(arr[p]==-1){
+		oo = getAns(p+1,o+1,0);
+		zz = getAns(p+1,0,z+1);
+		if(o+1>=3) oo=1;
+		if(z+1>=5) zz=1;
+
+		if(oo==0 and zz==0) ret = 0;
+		else if(zz==2 or oo==2 or (zz==1 and oo==0) or (zz==0 and oo==1)){
+			ret = 2;
+			// cout<<p<<" "<<oo<<" "<<zz<<"\n";
+		}
+		else ret = 1;
+	}
+	else if(arr[p]){
+		ret = getAns(p+1,o+1,0);
+		if(o+1>=3) ret=1;
+	}
+	else{
+		ret = getAns(p+1,0,z+1);
+		if(z+1>=5) ret=1;
+	}
+
+	return mem[p][o][z] = ret;
 }
 
 void answer(){
-    double r,b;
-    cin>>r>>b;
-    double ans = getAns(r,b);
-    printf("%.6lf\n",ans);
+	string str;
+	cin>>str;
+	int badf=0;
+	int goodf=0;
+	n = str.size();
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			for(int k=0;k<n;k++){
+				mem[i][j][k]=-1;
+			}
+		}
+	}
+	for(int i=0;i<n;i++){
+		if(str[i]=='A' or str[i]=='E' or str[i]=='I' or str[i]=='O' or str[i]=='U') arr[i]=1;
+		else if(str[i]!='?') arr[i]=0;
+		else arr[i]=-1;
+	}
+
+	int ans = getAns(0,0,0);
+	if(ans==0){
+		cout<<"GOOD\n";
+	}
+	else if(ans==1){
+		cout<<"BAD\n";
+	}
+	else{
+		cout<<"MIXED\n";
+	}
 }
 // remember these points
 //  -> check if li is needed
@@ -99,14 +141,8 @@ void answer(){
 //  -> check if 0 is initialized to the counter or sum
 
 int main(){
-    // fast();
+    fast();
     inout();
-    for(int i=0;i<505;i++){
-        mem[i][0]=0.0;
-        for(int j=1;j<505;j++){
-            mem[i][j]=-1;
-        }
-    }
 //    t_start;
 //     for no test case
 //     answer();

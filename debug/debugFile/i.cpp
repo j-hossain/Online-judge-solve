@@ -2,7 +2,7 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-typedef   unsigned long long    ll;
+typedef    long long    ll;
 typedef      long double   ld;
 typedef     vector<ll>      vll;
 #include <ext/pb_ds/assoc_container.hpp>
@@ -23,8 +23,10 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_up
 #define     lcm(a,b)        (a*b)/gcd(a,b)
 
 const ll N = 1e9 + 7;
-
-
+const ll mxn=1010;
+ll vi[mxn+10];
+ll colure[mxn+10];
+vector<ll>g[mxn+10];
 
 int main()
 {
@@ -32,30 +34,86 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    ll n,sum;
-    cin>>n>>sum;
-    ll a[n+10];
-    for(ll i=0; i<n; i++)
+    ll n,m,k,u,v;
+    cin>>n>>m>>k;
+    for(ll i=0; i<m; i++)
     {
-        cin>>a[i];
+        cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+
     }
-    vector<ll>v;
-    v.push_back(1);
-    ll x=1;
-    for(ll i=0; i<n; i++)
+    for(ll i=1; i<=n; i++)
     {
-       v.push_back(x*a[i]);
-       x*=a[i];
+        colure[i]=-1;
     }
-    ll s=0,ans=0;
-    for(ll i=v.size()-1;i>=0;i--)
+//    for(ll i=1; i<=n; i++)
+//    {
+//        cout<<colure[i]<<" ";
+//    }
+//    cout<<endl;
+    ll f=0;
+    for(ll i=1; i<=n; i++)
     {
-        ll x=sum-s;
-        s+=(x/v[i])*v[i];
-        ans+=(x/v[i]);
-        if(s==sum)break;
+        if(colure[i]!=-1)continue;
+        set<ll>st1,st2;
+        for(auto v:g[i])
+        {
+            st1.insert(v);
+            st2.insert(colure[v]);
+        }
+        ll c=1;
+        while(1)
+        {
+            if(st2.find(c)==st2.end())
+                break;
+            c++;
+        }
+        colure[i]=c;
+
+        for(ll j=1; j<=n; j++)
+        {
+            if(st1.find(j)==st1.end())
+            {
+                if(colure[j]==-1)
+                {
+                    colure[j]=c;
+                }
+                else if(colure[j]!=c)
+                    f=1;
+            }
+        }
+//        for(ll j=1;j<=n;j++)
+//            cout<<colure[j]<<" ";
+//        cout<<endl;
     }
-    cout<<ans<<endl;
+    for(ll i=1; i<=n; i++)
+    {
+        for(auto v:g[i])
+        {
+            if(colure[i]==colure[v])
+            {
+                f=1;
+                break;
+            }
+        }
+    }
+    for(ll i=1; i<=n; i++)
+    {
+        if(colure[i]>k)
+        {
+            f=1;
+            break;
+        }
+    }
+    if(f)cout<<"-1"<<endl;
+    else
+    {
+        for(ll i=1; i<=n; i++)
+            cout<<colure[i]<<" ";
+        cout<<endl;
+    }
+
 
     return 0;
 

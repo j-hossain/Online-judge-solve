@@ -1,3 +1,6 @@
+// For explaination of this code,
+// visit - https://cpblogdjoker.wordpress.com/2022/09/21/lightoj-1050-marbles-solution/
+
 // including all header files
 #include <bits/stdc++.h>
 

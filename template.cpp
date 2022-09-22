@@ -45,8 +45,8 @@ int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
 #define NN  '\n'
 
 // template declarations simplified
-#define pair<int,int>   pii
-#define pair<li,li>     pll
+#define pii             pair<int,int>
+#define pll             pair<li,li>
 #define MP(a, b)        make_pair(a, b)
 #define PP(x)           push_back(x)
 #define ALL(x)          x.begin(), x.end()

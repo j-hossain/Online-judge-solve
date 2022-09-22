@@ -45,8 +45,6 @@ int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
 #define NN  '\n'
 
 // template declarations simplified
-#define pii             pair<int,int>
-#define pll             pair<li,li>
 #define MP(a, b)        make_pair(a, b)
 #define PP(x)           push_back(x)
 #define ALL(x)          x.begin(), x.end()
@@ -62,34 +60,52 @@ typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_no
 // for file input output
 void inline inout(){
 #ifndef ONLINE_JUDGE
-    freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
-    freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
+    freopen("./input.txt", "r", stdin);
+    freopen("./output.txt", "w", stdout);
 #endif
 }
 
-double mem[505][505];
- 
-double getAns(int r,int b){
+const int mxx = 505;
 
-    if(mem[r][b]!=-1) return mem[r][b];
-    double ans = 0.0;
-    if(r>0 and b>1){
-        ans+=((double)r/(r+b))*getAns(r-1,b-1);
-    }
-    if(b>2){
-        ans+=((double)b/(r+b))*getAns(r,b-2);
-    }
-    if(b==1){
-        ans+=(b/(r+b));
-    }
-    return mem[r][b] = ans;
+li urn[mxx][mxx],rad[mxx][mxx];
+li purn[mxx][mxx],prad[mxx][mxx];
+li mem[mxx][mxx];
+li n,m;
+
+li getAns(int i, int j){
+    if(i<0 or j<0) return 0;
+    if(mem[i][j]!=-1) return mem[i][j];
+    return mem[i][j] = max(prad[i][j]+getAns(i,j-1),purn[i][j]+getAns(i-1,j));
 }
 
 void answer(){
-    double r,b;
-    cin>>r>>b;
-    double ans = getAns(r,b);
-    printf("%.6lf\n",ans);
+	cin>>n>>m;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+            mem[i][j]=-1;
+			cin>>urn[i][j];
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			cin>>rad[i][j];
+		}
+	}
+	for(int i=0;i<n;i++){
+		purn[i][0] = urn[i][0];
+		for(int j=1;j<m;j++){
+			purn[i][j] = purn[i][j-1]+urn[i][j];
+            int x=4;
+		}
+	}
+	for(int j=0;j<m;j++){
+		prad[0][j] = rad[0][j];
+		for(int i=1;i<n;i++){
+			prad[i][j] = prad[i-1][j]+rad[i][j];
+            int x=5;
+		}
+	}
+    cout<<getAns(n-1,m-1)<<"\n";
 }
 // remember these points
 //  -> check if li is needed
@@ -99,14 +115,8 @@ void answer(){
 //  -> check if 0 is initialized to the counter or sum
 
 int main(){
-    // fast();
+    fast();
     inout();
-    for(int i=0;i<505;i++){
-        mem[i][0]=0.0;
-        for(int j=1;j<505;j++){
-            mem[i][j]=-1;
-        }
-    }
 //    t_start;
 //     for no test case
 //     answer();
