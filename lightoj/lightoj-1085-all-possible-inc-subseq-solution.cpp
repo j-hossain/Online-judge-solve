@@ -28,7 +28,7 @@ using namespace std::chrono;
 #define uli unsigned long long int
 
 // most used numbers
-const int MM = 2e5 + 3;
+const int MM = 1e5 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
@@ -77,8 +77,70 @@ void inline inout()
 #endif
 }
 
+li arr[MM];
+set<li> st;
+map<li,int> mp;
+li seg[5*MM];
+
+void build(int st,int en, int nd){
+    if(st==en){
+        seg[nd]=0;
+        return;
+    }
+    build(left);
+    build(right);
+    int sft = nd<<1;
+    seg[nd] = seg[sft]+seg[sft+1];
+}
+
+void update(int st, int en, int nd, int i, int v){
+    if(en<i or i<st) return;
+    if(st==en and st==i){
+        seg[nd]+=v;
+        seg[nd]%=MD;
+        return;
+    }
+    update(left,i,v);
+    update(right,i,v);
+    int sft = nd<<1;
+    seg[nd] = (seg[sft]+seg[sft+1])%MD;
+}
+
+li query(int st, int en, int nd, int i, int j){
+    if(en<i or j<st) return 0LL;
+    if(i<=st and en<=j) return seg[nd];
+    return (query(left,i,j)+query(right,i,j))%MD;
+}
+
 void answer()
 {
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        st.insert(arr[i]);
+    }
+    li cnt=0;
+    for(int el:st){
+        mp[el] = ++cnt;
+    }
+    for(int i=0;i<n;i++){
+        arr[i] = mp[arr[i]];
+    }
+    st.clear();
+    mp.clear();
+
+    build(0,cnt,1);
+    li ans =0LL;
+    for(int i=n-1;i>=0;i--){
+        li til=1LL;
+        if(arr[i]<cnt)
+            til += query(0,cnt,1,arr[i]+1,cnt);
+        ans+=til;
+        ans%=MD;
+        update(0,cnt,1,arr[i],til);
+    }
+    cout<<ans<<"\n";
 }
 // remember these points
 //  -> check if li is needed
@@ -99,7 +161,7 @@ int main()
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
-        // pcs;
+        pcs;
         answer();
     }
     //     t_show;

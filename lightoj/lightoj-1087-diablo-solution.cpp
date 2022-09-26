@@ -28,7 +28,7 @@ using namespace std::chrono;
 #define uli unsigned long long int
 
 // most used numbers
-const int MM = 2e5 + 3;
+const int MM = 6e5 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
@@ -77,8 +77,86 @@ void inline inout()
 #endif
 }
 
+int arr[MM];
+int mark[MM];
+li seg[5*MM];
+
+void build(int st,int en, int nd){
+    if(st==en){
+        seg[nd]=mark[st];
+        return;
+    }
+    build(left);
+    build(right);
+    int sft = nd<<1;
+    seg[nd] = seg[sft]+seg[sft+1];
+}
+
+void update(int st, int en, int nd, int i){
+    if(en<i or i<st) return;
+    if(st==en and st==i){
+        seg[nd]=mark[st];
+        return;
+    }
+    update(left,i);
+    update(right,i);
+    int sft = nd<<1;
+    seg[nd] = seg[sft]+seg[sft+1];
+}
+
+li query(int st, int en, int nd, int i){
+    // cout<<st<<" "<<en<<" "<<seg[nd]<<"\n";
+    // if(seg[nd]<=i) return -1;
+    int sft = nd<<1;
+    if(st==en){
+        return st;
+    }
+    if(seg[sft]>=i+1) return query(left,i);
+    return query(right,i-seg[sft]);
+}
+
+
 void answer()
 {
+    int n,q;
+    cin>>n>>q;
+    for(int i=0;i<MM;i++) mark[i]=0;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        // cout<<arr[i]<<" ";
+        mark[i]=1;
+    }
+    // cout<<"\n";
+    build(0,MM-1,1);
+    int cnt=n;
+    while(q--){
+        string x;
+        cin>>x;
+        if(x=="a"){
+            int id;
+            cin>>id;
+            arr[n]=id;
+            mark[n]=1;
+            update(0,MM-1,1,n);
+            n++;
+            cnt++;
+        }
+        else{
+            int k;
+            cin>>k;
+            k--;
+            if(cnt<=k){
+                // cout<<cnt<<"\n";
+                cout<<"none\n";
+                continue;
+            }
+            int ind = query(0,MM-1,1,k);
+            cout<<arr[ind]<<"\n";
+            mark[ind]=0;
+            update(0,MM-1,1,ind);
+            cnt--;
+        }
+    }
 }
 // remember these points
 //  -> check if li is needed
@@ -98,7 +176,7 @@ int main()
     //     when test cases exist
     test()
     {
-        // cout<<"Case "<<TK<<":"<<NN;
+        cout<<"Case "<<TK<<":"<<NN;
         // pcs;
         answer();
     }

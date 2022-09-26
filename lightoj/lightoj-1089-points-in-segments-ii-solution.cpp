@@ -28,7 +28,7 @@ using namespace std::chrono;
 #define uli unsigned long long int
 
 // most used numbers
-const int MM = 2e5 + 3;
+const int MM = 1e7 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
@@ -77,8 +77,50 @@ void inline inout()
 #endif
 }
 
+set<int>st;
+map<int,int>mp;
+pii pnts[MM];
+int qq[MM];
+int ans[MM];
+
 void answer()
 {
+    int n,q;
+    cin>>n>>q;
+    for(int i=0;i<n;i++){
+        int a,b;
+        cin>>a>>b;
+        pnts[i]={a,b};
+        st.insert(a);
+        st.insert(b);
+    }
+    for(int i=0;i<q;i++){
+        cin>>qq[i];
+        st.insert(qq[i]);
+    }
+    int cnt=0;
+    for(int el:st){
+        mp[el] = ++cnt;
+    }
+    for(int i=0;i<=cnt;i++){
+        ans[i]=0;
+    }
+    for(int i=0;i<n;i++){
+        pnts[i].first = mp[pnts[i].first];
+        pnts[i].second = mp[pnts[i].second];
+        ans[pnts[i].first]++;
+        ans[pnts[i].second+1]--;
+    }
+    for(int i=1;i<=cnt;i++){
+        ans[i]+=ans[i-1];
+    }
+
+    for(int i=0;i<q;i++){
+        qq[i] = mp[qq[i]];
+        cout<<ans[qq[i]]<<"\n";
+    }
+
+
 }
 // remember these points
 //  -> check if li is needed
@@ -98,7 +140,7 @@ int main()
     //     when test cases exist
     test()
     {
-        // cout<<"Case "<<TK<<":"<<NN;
+        cout<<"Case "<<TK<<":"<<NN;
         // pcs;
         answer();
     }
