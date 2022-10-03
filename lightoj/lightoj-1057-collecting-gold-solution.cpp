@@ -28,7 +28,7 @@ using namespace std::chrono;
 #define uli unsigned long long int
 
 // most used numbers
-const int MM = 1e5 + 3;
+const int MM = 3e3 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
@@ -77,8 +77,51 @@ void inline inout()
 #endif
 }
 
+pii st;
+vector<pii> gs;
+int gsn;
+
+int mem[1<<16][16];
+
+int getDis(int i, int j){
+    return max(abs(gs[i].first-gs[j].first),abs(gs[i].second-gs[j].second));
+}
+
+int getAns(int last, int taken){
+    if(taken==(1<<gsn)-1){
+        return getDis(last,0);
+    }
+    if(mem[taken][last]!=-1) return mem[taken][last];
+    int ret = INT32_MAX;
+    for(int i=0;i<gsn;i++){
+        if(!(taken&(1<<i))){
+            ret = min(ret,getAns(i+1,taken|(1<<i))+getDis(last,i+1));
+        }
+    }
+    return mem[taken][last]=ret;
+}
+
 void answer()
 {
+    char x;
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>x;
+            if(x=='x'){
+                st = {i+1,j+1};
+            }
+            else if(x=='g'){
+                gs.push_back({i+1,j+1});
+            }
+        }
+    }
+    gsn = gs.size();
+    gs.push_back(st);
+    reverse(gs.begin(),gs.end());
+    cout<<getAns(0,0)<<"\n";
+    gs.clear();
 }
 // remember these points
 //  -> check if li is needed
@@ -99,6 +142,7 @@ int main()
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
+        memset(mem,-1,sizeof(mem));
         pcs;
         answer();
     }
