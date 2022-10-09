@@ -105,8 +105,6 @@ void update(int st, int en, int nd, int i){
 }
 
 li query(int st, int en, int nd, int i){
-    // cout<<st<<" "<<en<<" "<<seg[nd]<<"\n";
-    // if(seg[nd]<=i) return -1;
     int sft = nd<<1;
     if(st==en){
         return st;

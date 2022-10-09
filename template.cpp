@@ -87,22 +87,26 @@ void answer()
 //  -> check if the vectors, sets, maps are cleared
 //  -> check if 0 is initialized to the counter or sum
 
+void precalc(){
+}
+
 int main()
 {
-    fast();
+    // fast();
     inout();
     //    t_start;
     //     for no test case
     // answer();
+    precalc();
 
     //     when test cases exist
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        // pcs;
         answer();
     }
-    //     t_show;
+        // t_show;
 
     return 0;
 }
