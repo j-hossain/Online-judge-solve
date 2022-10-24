@@ -9,20 +9,6 @@ using namespace __gnu_pbds;
 
 using namespace std;
 
-// <for runtime show>
-using namespace std::chrono;
-
-#define t_start auto start = high_resolution_clock::now();
-#ifndef ONLINE_JUDGE
-#define t_show                                                 \
-    auto stop = high_resolution_clock::now();                  \
-    auto duration = duration_cast<milliseconds>(stop - start); \
-    cout << "Time taken by function: " << duration.count() << " milliseconds" << endl;
-#else
-#define t_show
-#endif
-// </for runtime show>
-
 //<shortcut macros>
 #define li long long int
 #define uli unsigned long long int
@@ -30,35 +16,30 @@ using namespace std::chrono;
 // most used numbers
 const int MM = 1e5 + 3;
 const int MD = 1e9 + 7;
-const double PI = acos(0);
+const double PI = acos(-1);
 
 // direction array
 int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1};
 int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
 
 // runs test cases
-#define test() \
-    int TT;    \
-    cin >> TT; \
-    for (int TK = 1; TK <= TT; TK++)
+#define test() int TT;cin >> TT;for (int TK = 1; TK <= TT; TK++)
 
 // for faster cin cout
-#define fast()                    \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0);
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
 // outputs simplified
 #define pcs cout << "Case " << TK << ": "
 #define SS ' '
 #define NN '\n'
+#define pyes cout<<"YES\n"
+#define pno cout<<"NO\n"
 
 // template declarations simplified
 #define pii pair<int, int>
 #define pll pair<li, li>
-#define MP(a, b) make_pair(a, b)
-#define PP(x) push_back(x)
-#define ALL(x) x.begin(), x.end()
+#define PP push_back
+#define All(x) x.begin(), x.end()
 
 // for segmentation
 #define left st, (st + en) / 2, nd * 2
@@ -77,27 +58,27 @@ void inline inout()
 #endif
 }
 
+void precalc(){
+}
+
 void answer()
 {
 }
 // remember these points
 //  -> check if li is needed
 //  -> check the constrains
-//  -> check the if the value can be 0
+//  -> check if the value can be 0
 //  -> check if the vectors, sets, maps are cleared
 //  -> check if 0 is initialized to the counter or sum
 
-void precalc(){
-}
-
 int main()
 {
-    // fast();
+    fast();
     inout();
     //    t_start;
     //     for no test case
-    // answer();
     precalc();
+    // answer();
 
     //     when test cases exist
     test()

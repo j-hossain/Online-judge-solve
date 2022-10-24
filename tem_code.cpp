@@ -28,7 +28,7 @@ using namespace std::chrono;
 #define uli unsigned long long int
 
 // most used numbers
-const int MM = 3e3 + 3;
+const int MM = 5e5 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
 
@@ -57,7 +57,7 @@ int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
 #define pii pair<int, int>
 #define pll pair<li, li>
 #define MP(a, b) make_pair(a, b)
-#define PP(x) push_back(x)
+#define PP push_back
 #define ALL(x) x.begin(), x.end()
 
 // for segmentation
@@ -77,80 +77,12 @@ void inline inout()
 #endif
 }
 
-pii pnt[MM];
-pii qrs[MM];
-
-int nums[MM][MM];
-
-int getDis(pii a, pii b){
-    int x = abs(a.first-b.first);
-    x*=x;
-    int y = abs(a.second-b.second);
-    y*=y;
-    double dd = (double)x+y;
-    int db = sqrt(dd);
-    if(db*db!=dd) db++;
-    return db;
-}
-
-int low(int q,int d){
-    int l,u;
-    l=0;
-    u = q;
-    while(l<u){
-        int md = (l+u)/2;
-        if(qrs[md].first<d) l = md+1;
-        else u = md;
-    }
-    return l;
+void precalc(){
 }
 
 void answer()
 {
-    int n,q;
-    while(cin>>n>>q){
-        if(n==0 and q==0) break;
-        for(int i=0;i<n;i++){
-            int x,y;
-            cin>>x>>y;
-            pnt[i] = {x,y};
-        }
-        for(int i=0;i<q;i++){
-            int rr;
-            cin>>rr;
-            qrs[i] = {rr,i};
-        }
-        sort(qrs,qrs+q);
-
-        for(int i=0;i<n;i++){
-            for(int j=0;j<q;j++){
-                nums[i][j]=0;
-            }
-            for(int j=0;j<n;j++){
-                int dis = getDis(pnt[i],pnt[j]);
-                int pos = low(q,dis);
-                // cout<<pos<<"\n";
-                nums[i][pos]++;
-            }
-            for(int j=1;j<q;j++){
-                nums[i][j] +=nums[i][j-1];
-            }
-        }
-
-        double ans[q+2];
-        double pos = 1.0/n;
-        for(int j=0;j<q;j++){
-            int sum = 0;
-            for(int i=0;i<n;i++){
-                sum+=nums[i][j];
-            }
-            ans[qrs[j].second] = pos*sum; 
-        }
-        for(int i=0;i<q;i++){
-            printf("%.2lf\n",ans[i]);
-        }
-        printf("\n");
-    }
+    
 }
 // remember these points
 //  -> check if li is needed
@@ -163,28 +95,19 @@ int main()
 {
     fast();
     inout();
-    // for(li i=0; i<MM; i++)
-    // {
-    //     for(li j=0; j<=i; j++)
-    //     {
-    //         if(j==0||j==i) c[i][j]=1;
-    //         else c[i][j]=(c[i-1][j-1]+c[i-1][j])%2;
-    //         // cout<<c[i][j]<<" ";
-    //     }
-    //     // cout<<"\n";
-    // }
     //    t_start;
     //     for no test case
     answer();
+    precalc();
 
     //     when test cases exist
     // test()
     // {
-    //     cout<<"Case "<<TK<<":"<<NN;
+    //     // cout<<"Case "<<TK<<":"<<NN;
     //     // pcs;
     //     answer();
     // }
-    //     t_show;
+        // t_show;
 
     return 0;
 }
