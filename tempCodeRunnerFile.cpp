@@ -1,2 +1,6 @@
 
-        sum-=(sum/arr[i])*arr[i];
+    // {
+    //     // cout<<"Case "<<TK<<":"<<NN;
+    //     // pcs;
+    //     answer();
+    // }

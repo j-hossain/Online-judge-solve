@@ -1,3 +1,4 @@
+// Accepted
 // including all header files
 #include <bits/stdc++.h>
 
@@ -10,14 +11,13 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll long long int
-#define dll long double
-#define ull unsigned long long int
+#define li long long int
+#define uli unsigned long long int
 
 // most used numbers
-const ll MM = 1e5 + 3;
-const ll MD = 1e9 + 7;
-const double PI = acos(-1.0);
+const int MM = 1e5 + 3;
+const int MD = 1e9 + 7;
+const double PI = acos(-1);
 
 // direction array
 int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1};
@@ -31,16 +31,15 @@ int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
 
 // outputs simplified
 #define pcs cout << "Case " << TK << ": "
-#define SS " " 
-#define NN "\n"
+#define SS ' '
+#define NN '\n'
 #define pyes cout<<"YES\n"
 #define pno cout<<"NO\n"
 
 // template declarations simplified
 #define pii pair<int, int>
-#define pll pair<ll, ll>
-#define vll vector<ll>
-#define pb push_back
+#define pll pair<li, li>
+#define PP push_back
 #define All(x) x.begin(), x.end()
 
 // for segmentation
@@ -60,10 +59,58 @@ void inline inout()
 #endif
 }
 
+struct code
+{
+    code *ch[2];
+    code(){ch[0]=ch[1]=nullptr;}
+};
+
+code *head;
+
+void insert(li a){
+    code * cur = head;
+    for(int i=30;i>=0;--i){
+        int j = (a>>i)&1;
+        if(cur->ch[j]==nullptr) cur->ch[j] = new code();
+        cur = cur->ch[j];
+    }
+}
+
+li search(li a){
+    li ret = 0LL;
+    code *cur = head;
+    for(int i=30;i>=0;--i){
+        int j = (a>>i)&1;
+        if(cur->ch[j^1]!=nullptr){
+            ret+=(1<<i);
+            cur = cur->ch[j^1];
+        }
+        else cur = cur->ch[j];
+    }
+    return ret;
+}
+
+
 void precalc(){
 }
 
-void answer(){
+void answer()
+{
+    int n;
+    cin>>n;
+    head = new code();
+    li pre=0LL;
+    insert(pre);
+    li ans=0LL;
+    for(int i=0;i<n;i++){
+        li num;
+        cin>>num;
+        pre^=num;
+        cout<<pre<<NN;
+        ans = max(ans,search(pre));
+        insert(pre);
+    }
+    cout<<ans<<NN;
 }
 // remember these points
 //  -> check if li is needed
@@ -76,17 +123,19 @@ int main()
 {
     fast();
     inout();
-    precalc();
+    //    t_start;
     //     for no test case
-    // answer();
+    precalc();
+    answer();
 
     //     when test cases exist
-    test()
-    {
-        // cout<<"Case "<<TK<<":"<<NN;
-        // pcs;
-        answer();
-    }
+    // test()
+    // {
+    //     // cout<<"Case "<<TK<<":"<<NN;
+    //     // pcs;
+    //     answer();
+    // }
+        // t_show;
 
     return 0;
 }

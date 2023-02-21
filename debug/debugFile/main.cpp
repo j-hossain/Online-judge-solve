@@ -30,7 +30,7 @@ using namespace std::chrono;
 const int MM = 1e5 + 3;
 const int MD = 1e9 + 7;
 const double PI = acos(0);
-
+#define ll long long
 //direction array
 int dx[]= {-1, 1, 0, 0, -1,-1, 1, 1};
 int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
@@ -62,21 +62,25 @@ int dy[]= { 0, 0,-1, 1, -1, 1, -1, 1};
 typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 
 // for file input output
-void inline inout(){
+void inline inout()
+{
 #ifndef ONLINE_JUDGE
     freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
     freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
 #endif
 }
 
-void answer(){
+void answer()
+{
     int n;
     cin>>n;
     int arr[n+2];
-    for(int i=0;i<n;i++){
+    for(int i=0; i<n; i++)
+    {
         cin>>arr[i];
     }
-    for(int i=1;i<n;i++){
+    for(int i=1; i<n; i++)
+    {
         arr[i]+=arr[i-1];
     }
     cout<<"Hello\n";
@@ -88,19 +92,44 @@ void answer(){
 //  -> check if the vectors, sets, maps are cleared
 //  -> check if 0 is initialized to the counter or sum
 
-int main(){
+int main()
+{
     fast();
-    inout();
-//    t_start;
-//     for no test case
-//     answer();
+   ll t;
+   cin>>t;
+   while(t--)
+   {
+         ll n;
+         cin>>n;
+    string s;
+    cin>>s;
+    map<char,ll>mp;
+     for(ll i=0;i<s.size();i++)
+     {
+      mp[s[i]]++;
+     }
+     ll gc=0;
+     for(auto x:mp)
+     {
+         gc=__gcd(gc,x.second);
+     }
+//     if(gc==1)
+//     {
+//         cout<<"0\n";
+//         continue;
+//     }
+     ll ans=0;
+     for(auto x:mp)
+     {
+         ans+=x.second/gc;
+     }
 
-//     when test cases exist
-    test(){
-//         pcs;
-        answer();
-    }
-//     t_show;
+
+
+        cout<<n-ans<<"\n";
+   }
+
+
 
     return 0;
 }
