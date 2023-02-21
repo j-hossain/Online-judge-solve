@@ -8,15 +8,19 @@ using namespace std;
 class Product{
     protected:
     // Since this class is be inherited by cartItem these properties are set to protected
+    
     string Name;
     double Price;
     string Description;
+    
     public:
+    
     Product(string name, double price, string description){
         this->Name = name;
         this->Price = price;
         this->Description= description;
     }
+    
     Product(){
         this->Name = "";
         this->Price = 0.0;
@@ -39,6 +43,7 @@ class Product{
         cout<<"Unit Price\t: "<<this->Price<<"\n";
         cout<<"Description\t: "<<this->Description<<"\n";
     }
+    
     // operator overloaded for using its object in stl
     bool operator< (const Product p)const{
         return this->Name<p.Name;
@@ -47,18 +52,22 @@ class Product{
 
 class cartItem: public Product{
     protected:
+    
     int quantity;
+    
     public:
+    
     // cart e ekta product r quantity dicchi, o etakei nie or parent class e pathay dicche
     cartItem(Product p, int quantity):Product(p.getterName(),p.getterPrice(),p.getterDescription()){
         this->quantity = quantity;
     }
+    
     cartItem():Product(){
         this->quantity = 0;
     }
 
     int getterQuantity() const{return quantity;}
-    void setterQuantity(int newQuantity) {this->quantity = newQuantity;}
+    void setterQuantity(int newQuantity) {this->quantity = max(0,newQuantity);}
 
     void show() const{
         // product er show method ta call korbe
@@ -66,21 +75,29 @@ class cartItem: public Product{
         // Then nijer quantity tao print korbe
         cout<<"Quanity\t\t: "<<quantity<<"\n";
     }
+    
     bool operator< (const cartItem item)const{
         return this->Name<item.Name;
     }
 };
 
 class orderDetails:public cartItem{
+    private:
+
     double orderCost;
+    
     public:
+    
     orderDetails(cartItem item):cartItem({item.getterName(),item.getterPrice(),item.getterDescription()},item.getterQuantity()){
         orderCost = Price*quantity;
     }
+    
     double getterCost()const{return orderCost;}
+    
     // since I do not want anyone to change the quantity in the order
     //  I will make the setterquantity to blank, which will not change anything
     void setterQuantity(int newQuantity){cerr<<"you cannot change the quantity once it is out of the cart\n";}
+    
     void show(){
         cartItem::show();
         cout<<"\t\t\t\tProduct Cost\t: "<<orderCost<<"\n";
@@ -89,14 +106,18 @@ class orderDetails:public cartItem{
 
 class Order{
     private:
+    
     // Keeping the orderlist dynamic
     vector<orderDetails> orderList;
     double totalCost;
+    
     public:
+    
     Order(){
         orderList.clear();
         totalCost = 0.0;
     }
+    
     void addItem(orderDetails orderItem){
         orderList.push_back(orderItem);
         // increasing the total cost while adding an orderItem to the list
@@ -121,24 +142,32 @@ class Order{
 
 class shoppingCart{
     protected:
+    
     // using set to maintain a list that contains unique elements only once
     set<cartItem> items;
     double totalCost;
+    
     private:
+    
     // This method can increase or decrease the quantity of a product in the cart
     // If the quantity is to be decreased, simply pass the negative form of the quantity you want to reduce
     void changeQuantity(_Rb_tree_const_iterator<cartItem> itemIT, cartItem changedItem){
+        
         int prevQuantity = itemIT->getterQuantity(); // fetching the previous quantity of the product
         totalCost-=(changedItem.getterPrice()*prevQuantity); // removing the cost for that quantity
+        
         //changing the quantity, if the changed item quantity is negative, 
         // if the previous quantity will be reduced
         int newQuantity = prevQuantity+changedItem.getterQuantity(); 
+        
         changedItem.setterQuantity(newQuantity);
+        
         // removing the previous item record
         items.erase(itemIT);
+        
         // If the product quantity is not a positive integer greater than zero,
         //  then it should not be in the cart
-        if(newQuantity>0){
+        if(changedItem.getterQuantity()){
             totalCost+=(changedItem.getterPrice()*newQuantity); // calculating the new cost
             items.insert(changedItem);
         }
@@ -149,15 +178,19 @@ class shoppingCart{
     }
     
     public:
+    
     shoppingCart(){
         totalCost = 0.0;
         items.clear();
     }
+    
     void addItem(Product addedProduct, int addedQuantity){
         cartItem item(addedProduct, addedQuantity);
         auto itemIT = items.find(item);
-        // If the product is not currently present in the set of cart, just insert it
+    
+        // If the product is not currently present in the set of cart,
         if(itemIT==items.end()){
+            //  just insert it
             items.insert(item);
             totalCost+=(item.getterPrice()*addedQuantity);
         }
@@ -168,11 +201,14 @@ class shoppingCart{
             changeQuantity(itemIT,item);
         }
     }
+    
     void reduceQuantity(Product targetProduct, int reducedQuantity){
         // converting the reducable quantity to negative,
         //  to use the same quantity changer function twice
         cartItem targetItem(targetProduct,-reducedQuantity);
+        
         auto itemIT = items.find(targetItem);
+        
         // handling the case where a product not currently present in the cart 
         //  is attempted to reduce,this makes no damage to the cart list
         if(itemIT!=items.end()){
@@ -183,9 +219,12 @@ class shoppingCart{
             cerr<<"This Product is not present in the cart\n";
         }
     }
+    
     void removeProduct(Product removedProduct){
         cartItem toRemove(removedProduct,0);
+        
         auto itemIT = items.find(toRemove);
+        
         // handling the case where a product not present in the cart
         //  is attempted to remove
         if(itemIT!=items.end()){
@@ -198,6 +237,7 @@ class shoppingCart{
             cerr<<"This product is not present in the cart\n";
         }
     }
+    
     // simply viewing the cart while showing each of the cart item
     void viewCart(){
         cout<<"\nViewing The Cart"<<"\n\n";
@@ -220,6 +260,7 @@ class shoppingCart{
     // After checking out you get order in return
     Order checkout(){
         Order newOrder;
+    
         for(auto item:items){
             // converting each cart item to an order item
             orderDetails orderItem(item);
@@ -227,8 +268,10 @@ class shoppingCart{
             // cost and others will be handling in the order class
             newOrder.addItem(orderItem);
         }
+    
         // Since the order has been created the cart is then cleared
         clearCart();
+    
         return newOrder;
     }
 };
@@ -240,29 +283,36 @@ int main(){
     Product shoe("Shoe",3000,"The shoe description...");
     
     shoppingCart theCart;
+    
     // checking add methods
     theCart.addItem(watch,1);
     theCart.addItem(shirt,2);
     theCart.addItem(shoe,1);
     theCart.viewCart();
+    
     // Checking add for existing products
     theCart.addItem(watch,1);
     theCart.viewCart();
+    
     // Testing the reduce methods
     theCart.reduceQuantity(watch,1);
     theCart.reduceQuantity(shirt,1);
+    
+    // Checking reducing to null
     theCart.reduceQuantity(shirt,1);
     theCart.viewCart();
+    
     // Checking the removal of a product completely
     theCart.removeProduct(watch);
     theCart.viewCart();
+    
     // Adding more than 1 quantity
     theCart.addItem(watch,3);
     theCart.viewCart();
+    
+    // Testing checkout
     Order newOrder = theCart.checkout();
     newOrder.confirmOrder();
-
-    // orderDetails od
 
     return 0;
 }
