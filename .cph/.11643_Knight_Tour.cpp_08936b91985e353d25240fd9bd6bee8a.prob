@@ -1,0 +1,1 @@
+{"name":"Local: 11643_Knight_Tour","url":"d:\\C programming\\Online-judge-solve\\11643_Knight_Tour.cpp","tests":[{"id":1678267313245,"input":"1\n8 3\n2 3\n4 5\n6 7","output":"Case 1: 12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\C programming\\Online-judge-solve\\11643_Knight_Tour.cpp","group":"local","local":true}

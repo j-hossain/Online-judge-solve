@@ -9,13 +9,13 @@ using namespace __gnu_pbds;
 
 using namespace std;
 
-//<shortcut macros>
-#define ll int
+//<shortcut macros> 
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,44 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    string a,b;
+    getline(cin,a);
+    if(a.empty()) getline(cin,a);
+    getline(cin,b);
+    for(int i=0;i<a.size();i++){
+        if('A'<=a[i]and a[i]<='Z'){
+            a[i] = 'a'+(a[i]-'A');
+        }
+    }
+    for(int i=0;i<b.size();i++){
+        if('A'<=b[i]and b[i]<='Z'){
+            b[i] = 'a'+(b[i]-'A');
+        }
+    }
+    sort(All(a));
+    sort(All(b));
+    reverse(All(a));
+    reverse(All(b));
+    while(a.back()==' ') a.pop_back();
+    while(b.back()==' ') b.pop_back();
+    if(a.size()==b.size()){
+        int f=1;
+        for(int i=0;i<a.size();i++){
+            f &= (a[i]==b[i]);
+        }
+        if(f){
+            cout<<"Yes\n";
+            return;
+        }
+    }
+    cout<<"No\n";
 }
 // remember these points
 //  -> check if li is needed

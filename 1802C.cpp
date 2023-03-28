@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,66 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+ll ans[204][204];
 
 void precalc(){
-    
+    ll cur = 0LL;
+    set<ll> st;
+    for(int i=0;i<203;i+=2){
+        for(int j=0;j<203;j+=2){
+            if((i/2)%2){
+                if((j/2)%2){
+                    ans[i+1][j] = cur++;
+                    ans[i+1][j+1] = cur++;
+                    ans[i][j] = cur++;
+                    ans[i][j+1] = cur++;
+                }
+                else{
+                    ans[i+1][j+1] = cur++;
+                    ans[i+1][j] = cur++;
+                    ans[i][j+1] = cur++;
+                    ans[i][j] = cur++;
+                }
+            }
+            else{
+                if((j/2)%2){
+                    ans[i][j+1] = cur++;
+                    ans[i][j] = cur++;
+                    ans[i+1][j+1] = cur++;
+                    ans[i+1][j] = cur++;
+                }
+                else{
+                    ans[i][j] = cur++;
+                    ans[i][j+1] = cur++;
+                    ans[i+1][j] = cur++;
+                    ans[i+1][j+1] = cur++;
+                }
+            }
+            
+        }
+    }
+    for(int i=0;i<200;i++){
+        for(int j=0;j<200;j++){
+            ll num1 = ans[i][j]^ans[i][j+1]^ans[i+1][j]^ans[i+1][j+1];
+            ll num2 = ans[i+2][j]^ans[i+2][j+1]^ans[i+3][j]^ans[i+3][j+1];
+            ll num3 = ans[i][j+2]^ans[i][j+3]^ans[i+1][j+2]^ans[i+1][j+3];
+            ll num4 = ans[i+2][j]^ans[i+2][j+1]^ans[i+3][j]^ans[i+3][j+1];
+            if(num1!=num2 or num3!=num3){
+                cout<<num1<<SS<<num2<<SS<<num3<<SS<<num4<<NN;
+            }
+            // st.insert(num);
+            // if(num){
+            //     cerr<<num<<SS<<ans[i][j]<<SS<<ans[i][j+1]<<SS<<ans[i+1][j]<<SS<<ans[i+1][j+1]<<NN;
+            // }
+        }
+    }
+    for(auto s:st) cerr<<s<<NN;
 }
 
 void answer(){
-    
+    ll n,m;
+    cin>>n>>m;
+    set<ll> st;
 }
 // remember these points
 //  -> check if li is needed
@@ -82,7 +132,7 @@ void answer(){
 int main()
 {
     fast();
-    inout();
+    // inout();
     precalc();
     //     for no test case
     // answer();
@@ -91,7 +141,7 @@ int main()
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        // pcs;
         answer();
     }
 

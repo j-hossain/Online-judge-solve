@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e3 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,58 @@ void inline inout()
 #endif
 }
 
+ll mon[MM];
 vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+ll siz;
+int vis[MM];
+
+ll dfs(ll u){
+    vis[u] = 1;
+    ll ret = mon[u];
+    for(auto v:g[u]){
+        if(vis[v]) continue;
+        ret+=dfs(v);
+    }
+    siz++;
+    return ret;
+}
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    ll n,m;
+    cin>>n>>m;
+    ll tot = 0LL;
+    for(int i=1;i<=n;i++){
+        cin>>mon[i];
+        tot+=mon[i];
+        vis[i] = 0;
+        g[i].clear();
+    }
+    for(int i=0;i<m;i++){
+        ll u,v;
+        cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    if(tot%n){
+        cout<<"No\n";
+        return;
+    }
+    ll need = tot/n;
+    int f=1;
+    for(int i=1;i<=n;i++){
+        if(vis[i]) continue;
+        siz = 0LL;
+        ll sum = dfs(i);
+        // cout<<i<<SS<<sum<<SS<<siz<<NN;
+        if(sum%siz) f=0;
+        else if(sum/siz!=need) f=0;
+    }
+    if(f) cout<<"Yes\n";
+    else cout<<"No\n";
 }
 // remember these points
 //  -> check if li is needed

@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e3 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,54 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+int spf[MM];
+set<int> g[MM];
+int dis[MM],vis[MM];
+
+void seive(int mxn){
+    for(int i=0;i<mxn;i++) spf[i] = i;
+    for(int i=2;i<mxn;i++){
+        if(spf[i]!=i) continue;
+        for(int j=i;j<mxn;j+=i) spf[j] = min(spf[j],i);
+    }
+}
+
+void findEdges(int mxn){
+    for(int i=2;i<mxn;i++){
+        ll x = i;
+        while(x>1){
+            if(spf[x]!=i)g[i].insert(spf[x]);
+            x/=spf[x];
+        }
+    }
+}
+
 
 void precalc(){
-    
+    seive(MM);
+    findEdges(MM);
 }
 
 void answer(){
-    
+    int a,b;
+    cin>>a>>b;
+    queue<int> qq;
+    for(int i=a;i<=b;i++)vis[i] = 0,dis[i] = -1;
+    dis[a] = 0;
+    vis[a] = 1;
+    qq.push(a);
+    while(!qq.empty()){
+        int u = qq.front();
+        qq.pop();
+        for(auto e:g[u]){
+            if(!vis[u+e] and u+e<=b){
+                vis[u+e] = 1;
+                dis[u+e] = dis[u]+1;
+                qq.push(u+e);
+            }
+        }
+    }
+    cout<<dis[b]<<NN;
 }
 // remember these points
 //  -> check if li is needed

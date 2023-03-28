@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e2 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,65 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+vector<int> g[MM];
+int dis[MM],vis[MM];
+int dis1[MM];
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<n;i++){
+        vis[i] = 0;
+        g[i].clear();
+    }
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    int s,d;
+    cin>>s>>d;
+    queue<int> qq;
+    qq.push(s);
+    vis[s] = 1;
+    dis[s] = 0;    
+    while (!qq.empty())
+    {
+        int u = qq.front();
+        qq.pop();
+        for(auto v:g[u]){
+            if(!vis[v]){
+                vis[v] = 1;
+                dis[v] = dis[u]+1;
+                qq.push(v);
+            }
+        }
+    }
+    for(int i=0;i<n;i++) vis[i] = 0;
+    qq.push(d);
+    vis[d] = 1;  
+    dis1[d] = 0;
+    int ans = 0;
+    while (!qq.empty())
+    {
+        int u = qq.front();
+        ans = max(ans,dis[u]+dis1[u]);
+        qq.pop();
+        for(auto v:g[u]){
+            if(!vis[v]){
+                vis[v] = 1;
+                dis1[v] = (dis1[u]+1);
+                // cout<<v<<SS<<dis1[u]<<NN;
+                qq.push(v);
+            }
+        }
+    }
+    cout<<ans<<NN;
 }
 // remember these points
 //  -> check if li is needed

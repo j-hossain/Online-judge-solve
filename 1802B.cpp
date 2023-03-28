@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,43 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    ll n;
+    cin>>n;
+    ll a[n+21];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    ll ans = 0LL;
+    ll khali = 0LL;
+    ll eka = 0LL;
+    ll doka = 0LL;
+    for(ll i=0;i<n;i++){
+        if(a[i]==1){
+            if(khali){
+                khali--;
+                eka++;
+            }
+            else{
+                ans++;
+                eka++;
+            }
+        }
+        else{
+            ll newDoka = eka/2;
+            eka -= newDoka*2;
+            doka+=newDoka;
+            khali = ans-doka;
+            khali-=eka;
+        }
+    }
+    cout<<ans<<NN;
 }
 // remember these points
 //  -> check if li is needed
@@ -82,7 +109,7 @@ void answer(){
 int main()
 {
     fast();
-    inout();
+    // inout();
     precalc();
     //     for no test case
     // answer();
@@ -91,7 +118,7 @@ int main()
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        // pcs;
         answer();
     }
 

@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,34 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+ll p = 31;
+ll pw[MM];
 
 void precalc(){
-    
+    pw[0] = 1LL;
+    for(ll i=1;i<MM;i++){
+        pw[i] = (pw[i-1]*p)%MD;
+    }
 }
 
 void answer(){
-    
+    string s;
+    cin>>s;
+    int n = s.size();
+    ll suf[n+2];
+    ll hs = 0LL;
+    for(int i=n-1;i>=0;i--){
+        hs  = (hs+((s[i]-'a'+1)*pw[n-i-1])%MD)%MD;
+        suf[i] = hs;
+    }
+    ll ans = n;
+    hs = 0LL;
+    for(int i=n-1;i>=0;i--){
+        hs = (hs*p)%MD;
+        hs = (hs+(s[i]-'a'+1))%MD;
+        if(suf[i]==hs) ans = i;
+    }
+    cout<<n+ans<<NN;
 }
 // remember these points
 //  -> check if li is needed

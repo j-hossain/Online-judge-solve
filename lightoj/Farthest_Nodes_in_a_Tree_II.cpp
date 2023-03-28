@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 30000 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,71 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+vector<pll> g[MM];
+int vis[MM];
+ll far[MM];
 
 void precalc(){
     
 }
 
+void dfs2(ll u, ll curMx){
+    vis[u] = 1;
+    ll mx1,mx2;
+    mx1 = mx2 = 0LL;
+    for(auto [v,w]: g[u]){
+        if(vis[v]) continue;
+        if(far[v]+w>=mx1){
+            mx2 = mx1;
+            mx1 = far[v]+w;
+        }
+        else if(far[v]+w>mx2){
+            mx2 = far[v]+w;
+        }
+    }
+    for(auto [v,w]:g[u]){
+        if(vis[v]) continue;
+        if(far[v]+w==mx1){
+            dfs2(v,max(mx2,curMx)+w);
+        }
+        else{
+            dfs2(v,max(mx1,curMx)+w);
+        }
+    }
+    far[u] = max(far[u],curMx);
+}
+
+ll dfs(ll u, ll p){
+    vis[u] = 1;
+    ll mx = 0LL;
+    for(auto [v,w]:g[u]){
+        if(vis[v]) continue;
+        ll ans = dfs(v,u)+w;
+        mx = max(mx,ans);
+    }
+    // cout<<u<<SS<<mx<<NN;
+    return far[u] = mx;
+}
+
 void answer(){
-    
+    ll n;
+    cin>>n;
+    for(int i=0;i<n-1;i++){
+        ll u,v,w;
+        cin>>u>>v>>w;
+        // cout<<u<<SS<<v<<SS<<w<<NN;
+        g[u].push_back({v,w});
+        g[v].push_back({u,w});
+    }
+    dfs(0,-1);
+    for(int i=0;i<n;i++) vis[i] = 0;
+    dfs2(0,0);
+    for(int i=0;i<n;i++){
+        cout<<far[i]<<NN;
+        g[i].clear();
+        vis[i] = 0;
+        far[i] = 0;
+    }
 }
 // remember these points
 //  -> check if li is needed
@@ -90,8 +145,8 @@ int main()
     //     when test cases exist
     test()
     {
-        // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        cout<<"Case "<<TK<<":"<<NN;
+        // pcs;
         answer();
     }
 

@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,59 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+ll lps[MM];
+void calcLPS(string &pat){
+    ll i=0;
+    lps[0] = 0;
+    for(int j=1;j<pat.size();j++){
+        if(pat[i]==pat[j]){
+            lps[j] = lps[j-1]+1;
+            i++;
+        }
+        else{
+            i=0;
+            if(pat[i]==pat[j]){
+                lps[j] = 1;
+                i++;
+            }
+            else{
+                lps[j] = 0;
+            }
+        }
+    }
+}
+
+string pat,s;
+
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    cin>>s>>pat;
+    calcLPS(pat);
+    int j=0;
+    int m=pat.size();
+    int cnt=0;
+    int i=0;
+    while(i<s.size()){
+        if(pat[j]==s[i]){
+            i++;
+            j++;
+        }
+        else if(j>0){
+            j = lps[j-1];
+        }
+        else{
+            i++;
+        }
+        if(j==m){
+            cnt++;
+            j = lps[j-1];
+        }
+    }
+    cout<<cnt<<"\n";
 }
 // remember these points
 //  -> check if li is needed

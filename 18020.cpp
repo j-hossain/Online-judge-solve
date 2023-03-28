@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 1e6 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,71 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+
 
 void precalc(){
     
 }
 
 void answer(){
-    
+    ll n;
+    cin>>n;
+    map<ll,ll> mp;
+    ll s=0LL;
+    ll d = 0LL;
+    ll a[n+2];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+        if(mp.find(abs(a[i]))!=mp.end()){
+            // cerr<<a[i]<<NN;
+            s--;
+            d+=2;
+        }
+        else{
+            s++;
+            mp[abs(a[i])] = 1;
+        }
+    }
+    ll mx[n+2],mn[n+2];
+    cerr<<s<<SS<<d<<NN;
+    for(ll i=1;i<=n;i++){
+        ll mxt,mnt;
+        mxt = 0LL;
+        mnt = 0LL;
+        if(s>=i){
+            mxt = min(s,i);
+        }
+        else{
+            mxt+=s;
+            if(d/2>=i-s){
+                // cout<<i<<SS<<mxt<<NN;
+                mxt+=min(i-s,d/2);
+            }
+            else{
+                mxt+=(d/2);
+                if(mxt<i){
+                    ll dif = i-mxt;
+                    mxt-=dif;
+                }
+            }
+        }
+        if(d>=i){
+            mnt = i%2;
+        }
+        else{
+            mnt+=(i-d);
+        }
+        mx[i] = mxt;
+        mn[i] = mnt;
+    }
+    for(int i=1;i<=n;i++){
+        cout<<mx[i]<<SS;
+    }
+    cout<<NN;
+    for(int i=1;i<=n;i++){
+        cout<<mn[i]<<SS;
+    }
+    cout<<NN;
 }
 // remember these points
 //  -> check if li is needed
@@ -82,7 +137,7 @@ void answer(){
 int main()
 {
     fast();
-    inout();
+    // inout();
     precalc();
     //     for no test case
     // answer();
@@ -91,7 +146,7 @@ int main()
     test()
     {
         // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        // pcs;
         answer();
     }
 

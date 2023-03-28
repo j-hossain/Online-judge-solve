@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 200+10;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,81 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
-
 void precalc(){
     
 }
 
+struct edge{
+    ll u,v,w;
+    edge(ll u, ll v, ll w) {
+        this->u=u;
+        this->v=v;
+        this->w=w;
+    }
+    edge() {u=v=w=0;}
+    bool operator<(const edge &e)const{ return e.w<this->w;}
+    bool operator>(const edge &e)const{ return e.w>this->w;}
+};
+
+set<ll> g[MM];
+ll par[MM];
+
+ll findPar(ll a) 
+{
+    return par[a] = par[a]==a?a:findPar(par[a]);
+}
+
+ll  mxEd;
+vector<edge> ed;
+int vis[MM];
+
+void getMax(ll p, ll tar, ll ind){
+    vis[p] = 1;
+    if(p==tar) {mxEd = ind;return;}
+    for(auto i:g[p]){
+        auto [u,v,w] = ed[i];
+        if(v==p) swap(u,v);
+        if(!vis[v]) getMax(v,tar,ed[ind].w<w?i:ind);
+    }   
+} 
+
 void answer(){
-    
+    ll n,m;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++){
+        par[i] = i;
+        g[i].clear();
+    }
+    ed.clear();
+    ll ans = 0LL;
+    for(int i=0;i<m;i++){
+        ll u,v,w;
+        cin>>u>>v>>w;
+        ed.push_back({u,v,w});
+        ll pu = findPar(u);
+        ll pv = findPar(v);
+        if(pu!=pv){
+            g[u].insert(i);
+            g[v].insert(i);
+            par[pv] = pu;
+            ans+=w;
+        }
+        else{
+            for(int i=1;i<=n;i++) vis[i] = 0;
+            getMax(u,v,i);
+            g[u].insert(i);
+            g[ed[mxEd].u].erase(mxEd);
+            g[v].insert(i);
+            g[ed[mxEd].v].erase(mxEd);
+            ans+=ed[i].w;
+            ans-=ed[mxEd].w;
+        }
+        set<ll> pars;
+        for(int i=1;i<=n;i++) pars.insert(findPar(i));
+        if(pars.size()==1){ cout<<ans<<NN;}
+        else{cout<<"-1\n";}
+    }
+
 }
 // remember these points
 //  -> check if li is needed
@@ -90,8 +155,8 @@ int main()
     //     when test cases exist
     test()
     {
-        // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
+        cout<<"Case "<<TK<<":"<<NN;
+        // pcs;
         answer();
     }
 

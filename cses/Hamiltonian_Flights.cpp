@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 using namespace std;
 
 //<shortcut macros>
-#define ll int
+#define ll long long int
 #define dll long double
 #define ull unsigned long long int
 
 // most used numbers
-const ll MM = 5e2 + 3;
+const ll MM = 50 + 3;
 const ll MD = 1e9 + 7;
 const double PI = acos(-1.0);
 
@@ -61,16 +61,44 @@ void inline inout()
 #endif
 }
 
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
+vector<ll> g[30];
+ll mem[22][(1<<21)];
+ll n,m;
+
+ll getAns(ll u, ll msk){
+    if(u==n-1) return (msk==((1LL<<n)-1));
+    if(mem[u][msk]!=-1) return mem[u][msk];
+    
+    ll ret = 0LL;
+    for(auto v: g[u]){
+        if(msk&(1LL<<v)) continue;
+        ret = (ret+getAns(v,msk|(1LL<<v)))%MD;
+    }
+    return mem[u][msk] = ret;
+}
+
 
 void precalc(){
-    
 }
 
 void answer(){
-    
+    cin>>n>>m;
+    for(int i=0;i<n;i++){
+        for(ll j=0;j<(1<<21);j++){
+            mem[i][j] = -1;
+        }
+    }
+    ll u,v;
+    for(ll i=0;i<m;i++){
+        cin>>u>>v;
+        u--;
+        v--;
+        g[u].push_back(v);
+    }
+    cout<<getAns(0,1)<<NN;
+    for(int i=0;i<n;i++){
+        g[i].clear();
+    }
 }
 // remember these points
 //  -> check if li is needed
@@ -82,18 +110,18 @@ void answer(){
 int main()
 {
     fast();
-    inout();
+    // inout();
     precalc();
     //     for no test case
-    // answer();
+    answer();
 
     //     when test cases exist
-    test()
-    {
-        // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
-        answer();
-    }
+    // test()
+    // {
+    //     // cout<<"Case "<<TK<<":"<<NN;
+    //     // pcs;
+    //     answer();
+    // }
 
     return 0;
 }
