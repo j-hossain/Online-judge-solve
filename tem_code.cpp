@@ -1,99 +1,55 @@
-// including all header files
-#include <bits/stdc++.h>
-
-//<for policy based data structure>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-//</for policy based data structure>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-//<shortcut macros>
-#define ll int
-#define dll long double
-#define ull unsigned long long int
+#define ll long long int
 
-// most used numbers
-const ll MM = 5e2 + 3;
-const ll MD = 1e9 + 7;
-const double PI = acos(-1.0);
-
-// direction array
-int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1};
-int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
-
-// runs test cases
-#define test() int TT;cin >> TT;for (int TK = 1; TK <= TT; TK++)
-
-// for faster cin cout
-#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-
-// outputs simplified
-#define pcs cout << "Case " << TK << ": "
-#define SS " " 
-#define NN "\n"
-#define pyes cout<<"YES\n"
-#define pno cout<<"NO\n"
-
-// template declarations simplified
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define vll vector<ll>
-#define pb push_back
-#define All(x) x.begin(), x.end()
-
-// for segmentation
-#define left st, (st + en) / 2, nd * 2
-#define right (st + en) / 2 + 1, en, nd * 2 + 1
-//</shortcut macros>
-
-// ordered set
-typedef tree<int, null_type, greater<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
-
-
-// for file input output
-void inline inout()
-{
-#ifndef ONLINE_JUDGE
-    freopen("D:/C programming/Online-judge-solve/input.txt", "r", stdin);
-    freopen("D:/C programming/Online-judge-solve/output.txt", "w", stdout);
-#endif
-}
-
-vector<ll> g[MM];
-ll dis[MM],vis[MM],par[MM];
-ll ans;
-
-void precalc(){
-    
-}
-
-void answer(){
-    
-}
-// remember these points
-//  -> check if li is needed
-//  -> check the constrains
-//  -> check if the value can be 0
-//  -> check if the vectors, sets, maps are cleared
-//  -> check if 0 is initialized to the counter or sum
-
-int main()
-{
-    fast();
-    inout();
-    precalc();
-    //     for no test case
-    // answer();
-
-    //     when test cases exist
-    test()
-    {
-        // cout<<"Case "<<TK<<":"<<NN;
-        pcs;
-        answer();
+int main(){
+    freopen("wigz.in", "r", stdin);
+    int t;
+    cin>>t;
+    while(t--){
+        ll n,m,k;
+        cin>>n>>m>>k;
+        ll g[503][504];
+        ll r[504],c[504];
+        for(int i=0;i<n;i++) r[i] = 0LL;
+        for(int i=0;i<m;i++) c[i] = 0LL;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                cin>>g[i][j];
+                r[i]+=g[i][j];
+                c[j]+=g[i][j];
+            }
+        }
+        ll ans = 0LL;
+        if(n<m){
+            for(int i=0;i<m;i++){
+                for(int j=0;j<=i;j++){
+                    swap(g[i][j],g[j][i]);
+                }
+            }
+            swap(n,m);
+        }
+            for(ll i = 0;i<(1LL<<m);i++){
+                if(__builtin_popcount(i)>k) continue;
+                ll tem[n+2];
+                ll cur = 0LL;
+                for(int j=0;j<n;j++) tem[j] = r[j];
+                for(int j=0;j<m;j++){
+                    if((1LL<<j)&i){
+                        cur+=c[j];
+                        for(int k=0;k<n;k++) tem[k]-=g[k][j];
+                    }
+                }
+                sort(tem,tem+n,greater<ll>());
+                ll rem = k-__builtin_popcount(i);
+                if(rem>n) continue;
+                for(int j=0;j<rem;j++){
+                    cur+=tem[j];
+                }
+                ans = max(ans,cur);
+            }
+        
+        cout<<ans<<"\n";
     }
-
-    return 0;
 }
