@@ -3,7 +3,6 @@
   "cmake.configureOnOpen": false,
   "C_Cpp.default.cppStandard": "c++20",
   "code-runner.executorMap": {
-
     "javascript": "node",
     "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
@@ -57,7 +56,6 @@
     "sml": "cd $dir && sml $fileName"
   },
   "code-runner.executorMapByFileExtension": {
-
     ".vb": "cd $dir && vbc /nologo $fileName && $dir$fileNameWithoutExt",
     ".vbs": "cscript //Nologo",
     ".scala": "scala",
@@ -90,7 +88,25 @@
     ".sml": "cd $dir && sml $fileName"
   },
   "code-runner.executorMapByGlob": {
-  
     "pom.xml": "cd $dir && mvn clean package"
+  },
+  "cph.general.onceMaintainerMessage": false,
+  "files.associations": {
+    "array": "cpp",
+    "deque": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "stacktrace": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp",
+    "iostream": "cpp"
   }
 }

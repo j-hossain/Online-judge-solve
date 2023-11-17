@@ -1,0 +1,1 @@
+{"name":"Local: e","url":"c:\\Users\\BS-1029\\CP\\Online-judge-solve\\icpc preli\\e.cpp","tests":[{"id":1697194637052,"input":"2\n1\n1\n7\n1 1 2 3 3 4 7\n","output":"Case 1: 0\nCase 2: 19\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\BS-1029\\CP\\Online-judge-solve\\icpc preli\\e.cpp","group":"local","local":true}
