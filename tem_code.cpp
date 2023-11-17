@@ -1,55 +1,98 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <map>
+#include <vector>
 using namespace std;
 
-#define ll long long int
+class versionManager
+{
+    int curVersion;
+    map<string, int> featureToVersion;
 
-int main(){
-    freopen("wigz.in", "r", stdin);
-    int t;
-    cin>>t;
-    while(t--){
-        ll n,m,k;
-        cin>>n>>m>>k;
-        ll g[503][504];
-        ll r[504],c[504];
-        for(int i=0;i<n;i++) r[i] = 0LL;
-        for(int i=0;i<m;i++) c[i] = 0LL;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                cin>>g[i][j];
-                r[i]+=g[i][j];
-                c[j]+=g[i][j];
+public:
+    versionManager()
+    {
+        curVersion = 1;
+        // take input for initial features;
+        string feature;
+        while (cin >> feature)
+        {
+            if (feature[0] == '[')
+            {
+                feature.erase(feature.begin());
             }
+            char en = feature.back();
+            feature.pop_back();
+            featureToVersion[feature] = curVersion;
+            if (en == ']')
+                break;
         }
-        ll ans = 0LL;
-        if(n<m){
-            for(int i=0;i<m;i++){
-                for(int j=0;j<=i;j++){
-                    swap(g[i][j],g[j][i]);
-                }
-            }
-            swap(n,m);
-        }
-            for(ll i = 0;i<(1LL<<m);i++){
-                if(__builtin_popcount(i)>k) continue;
-                ll tem[n+2];
-                ll cur = 0LL;
-                for(int j=0;j<n;j++) tem[j] = r[j];
-                for(int j=0;j<m;j++){
-                    if((1LL<<j)&i){
-                        cur+=c[j];
-                        for(int k=0;k<n;k++) tem[k]-=g[k][j];
-                    }
-                }
-                sort(tem,tem+n,greater<ll>());
-                ll rem = k-__builtin_popcount(i);
-                if(rem>n) continue;
-                for(int j=0;j<rem;j++){
-                    cur+=tem[j];
-                }
-                ans = max(ans,cur);
-            }
-        
-        cout<<ans<<"\n";
     }
+
+    void addFetaure(string feature)
+    {
+        curVersion++;
+        featureToVersion[feature] = curVersion;
+    }
+
+    void modifyFeature(string oldFeature, string newFeature)
+    {
+        curVersion++;
+        featureToVersion[oldFeature] = -1;
+        featureToVersion[newFeature] = curVersion;
+    }
+
+    void checkFeature(int version, string feature)
+    {
+        if (featureToVersion.find(feature) != featureToVersion.end())
+        {
+            if (featureToVersion[feature] <= version and featureToVersion[feature] != -1)
+            {
+                cout << "yes\n";
+                return;
+            }
+        }
+        cout << "no\n";
+    }
+};
+
+int main()
+{
+    versionManager vm = versionManager();
+    string op;
+    while (cin >> op)
+    {
+        if (op == "Add")
+        {
+            string feature;
+            cin >> feature;
+            vm.addFetaure(feature);
+        }
+        else if (op == "Modify")
+        {
+            string oldFeature, newFeature;
+            cin >> oldFeature >> newFeature;
+            vm.modifyFeature(oldFeature, newFeature);
+        }
+        else
+        {
+            string ver, feature;
+            cin >> ver >> feature;
+            int tem = 0;
+            while ('0' <= ver.back() and ver.back() <= '9')
+            {
+                tem *= 10;
+                tem += (ver.back() - '0');
+                ver.pop_back();
+            }
+            int version = 0;
+            while (tem)
+            {
+                version *= 10;
+                version += (tem % 10);
+                tem /= 10;
+            }
+            vm.checkFeature(version, feature);
+        }
+    }
+    return 0;
 }
